@@ -1,0 +1,36 @@
+package com.kotich.app.bookmarks.domain
+
+import com.kotich.app.core.util.MimeTypes
+import com.kotich.app.core.util.ext.isImage
+import com.kotich.app.list.ui.model.ListModel
+import org.koitharu.kotatsu.parsers.model.Manga
+import org.koitharu.kotatsu.parsers.model.MangaPage
+import java.time.Instant
+
+data class Bookmark(
+	val manga: Manga,
+	val pageId: Long,
+	val chapterId: Long,
+	val page: Int,
+	val scroll: Int,
+	val imageUrl: String,
+	val createdAt: Instant,
+	val percent: Float,
+) : ListModel {
+
+	override fun areItemsTheSame(other: ListModel): Boolean {
+		return other is Bookmark &&
+			manga.id == other.manga.id &&
+			chapterId == other.chapterId &&
+			page == other.page
+	}
+
+	fun toMangaPage() = MangaPage(
+		id = pageId,
+		url = imageUrl,
+		preview = imageUrl.takeIf {
+			MimeTypes.getMimeTypeFromUrl(it)?.isImage == true
+		},
+		source = manga.source,
+	)
+}

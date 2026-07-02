@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- iOS 27 Liquid Glass - Dark Mode Colors -->
+<resources>
+	<!-- iOS System Blue (dark) -->
+	<color name="kotatsu_primary">#0A84FF</color>
+	<color name="kotatsu_primaryContainer">#003A7A</color>
+	<color name="kotatsu_onPrimary">#003166</color>
+	<color name="kotatsu_onPrimaryContainer">#C5DFFF</color>
+	<color name="kotatsu_inversePrimary">#0062CC</color>
+
+	<!-- iOS Secondary (dark gray tones) -->
+	<color name="kotatsu_secondary">#98989D</color>
+	<color name="kotatsu_secondaryContainer">#3A3A3C</color>
+	<color name="kotatsu_onSecondary">#2C2C2E</color>
+	<color name="kotatsu_onSecondaryContainer">#E5E5EA</color>
+
+	<!-- iOS Tertiary (Indigo dark) -->
+	<color name="kotatsu_tertiary">#5E5CE6</color>
+	<color name="kotatsu_tertiaryContainer">#2C2B5A</color>
+	<color name="kotatsu_onTertiary">#2A295C</color>
+	<color name="kotatsu_onTertiaryContainer">#CFCEF5</color>
+
+	<!-- iOS Liquid Glass Surfaces - dark mode -->
+	<color name="kotatsu_surface">#000000</color>
+	<color name="kotatsu_surfaceDim">#000000</color>
+	<color name="kotatsu_surfaceBright">#2C2C2E</color>
+	<color name="kotatsu_surfaceContainerLowest">#000000</color>
+	<color name="kotatsu_surfaceContainerLow">#1C1C1E</color>
+	<color name="kotatsu_surfaceContainer">#2C2C2E</color>
+	<color name="kotatsu_surfaceContainerHigh">#3A3A3C</color>
+	<color name="kotatsu_surfaceContainerHighest">#48484A</color>
+	<color name="kotatsu_surfaceVariant">#2C2C2E</color>
+	<color name="kotatsu_onSurface">#F2F2F7</color>
+	<color name="kotatsu_onSurfaceVariant">#AEAEB2</color>
+	<color name="kotatsu_inverseSurface">#E5E5EA</color>
+	<color name="kotatsu_inverseOnSurface">#1C1C1E</color>
+	<color name="kotatsu_background">#000000</color>
+	<color name="kotatsu_outline">#48484A</color>
+</resources>

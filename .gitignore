@@ -1,0 +1,15 @@
+*.iml
+.gradle
+/local.properties
+/.idea
+.DS_Store
+/build
+/app/build
+/parsers/build
+/kotatsu-parsers-ksp/build
+/captures
+.externalNativeBuild
+.cxx
+local.properties
+*.apk
+*.aab
