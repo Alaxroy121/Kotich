@@ -17,8 +17,13 @@ import androidx.core.view.isVisible
 import androidx.customview.view.AbsSavedState
 import androidx.interpolator.view.animation.FastOutLinearInInterpolator
 import androidx.interpolator.view.animation.LinearOutSlowInInterpolator
+import android.graphics.Color
+import android.graphics.Outline
+import android.view.View
+import android.view.ViewOutlineProvider
 import com.google.android.material.bottomnavigation.BottomNavigationMenuView
 import com.google.android.material.navigation.NavigationBarView
+import com.kotich.app.R
 import com.kotich.app.core.util.ext.applySystemAnimatorScale
 import com.kotich.app.core.util.ext.measureHeight
 import kotlin.math.max
@@ -44,6 +49,21 @@ class SlidingBottomNavigationView @JvmOverloads constructor(
 
 	private var currentState = STATE_UP
 	private var behavior = HideBottomNavigationOnScrollBehavior()
+
+	init {
+		// iOS 27 Liquid Glass floating tab bar
+		post {
+			setBackgroundResource(R.drawable.bg_glass_tab_bar)
+			elevation = 8f * resources.displayMetrics.density
+			outlineProvider = object : ViewOutlineProvider() {
+				override fun getOutline(view: View, outline: Outline) {
+					val radius = 28f * resources.displayMetrics.density
+					outline.setRoundRect(0, 0, view.width, view.height, radius)
+				}
+			}
+			clipToOutline = true
+		}
+	}
 
 	var isPinned: Boolean
 		get() = behavior.isPinned
