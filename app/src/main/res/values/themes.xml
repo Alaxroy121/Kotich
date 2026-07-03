@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools">
 
-	<!-- iOS 27 Liquid Glass Theme -->
+	<!-- Base application theme. -->
 	<style name="Base.Theme.Kotatsu" parent="Theme.Material3.DayNight.NoActionBar">
 
-		<!-- iOS 27 System Colors -->
+		<!-- Theme Colors -->
 		<item name="colorPrimary">@color/kotatsu_primary</item>
 		<item name="colorPrimaryContainer">@color/kotatsu_primaryContainer</item>
 		<item name="colorOnPrimary">@color/kotatsu_onPrimary</item>
@@ -32,10 +32,10 @@
 		<item name="colorSurfaceInverse">@color/kotatsu_inverseSurface</item>
 		<item name="colorOnSurfaceInverse">@color/kotatsu_inverseOnSurface</item>
 		<item name="colorOnBackground">@color/kotatsu_onSurface</item>
-		<item name="colorError">#FF3B30</item>
-		<item name="colorErrorContainer">#FFE5E3</item>
-		<item name="colorOnError">#FFFFFF</item>
-		<item name="colorOnErrorContainer">#410001</item>
+		<item name="colorError">@color/error</item>
+		<item name="colorErrorContainer">@color/errorContainer</item>
+		<item name="colorOnError">@color/onError</item>
+		<item name="colorOnErrorContainer">@color/onErrorContainer</item>
 		<item name="colorOutline">@color/kotatsu_outline</item>
 		<item name="colorOutlineVariant">@color/kotatsu_outline</item>
 
@@ -44,22 +44,14 @@
 		<item name="actionModeWebSearchDrawable">@drawable/abc_ic_search_api_material</item>
 		<item name="expandCollapseIndicator">@drawable/m3_split_button_chevron_avd</item>
 
-		<!-- iOS 27 Edge-to-edge, transparent system bars -->
+		<!-- Base attributes -->
 		<item name="android:windowLightStatusBar">@bool/light_status_bar</item>
 		<item name="android:statusBarColor">@android:color/transparent</item>
-		<item name="android:navigationBarColor">@android:color/transparent</item>
+		<item name="android:navigationBarColor">@color/dim</item>
 		<item name="android:navigationBarDividerColor" tools:targetApi="o_mr1">@null</item>
 		<item name="android:enforceNavigationBarContrast" tools:targetApi="Q">false</item>
 		<item name="android:enforceStatusBarContrast" tools:targetApi="Q">false</item>
 		<item name="windowActionModeOverlay">true</item>
-
-		<!-- iOS 27 Rounded corners on bottom sheets and dialogs -->
-		<item name="shapeAppearanceSmallComponent">@style/ShapeAppearance.Kotich.Small</item>
-		<item name="shapeAppearanceMediumComponent">@style/ShapeAppearance.Kotich.Medium</item>
-		<item name="shapeAppearanceLargeComponent">@style/ShapeAppearance.Kotich.Large</item>
-
-		<!-- iOS 27 Floating tab bar style -->
-		<item name="bottomNavigationStyle">@style/Widget.Kotich.BottomNavigation</item>
 
 		<!-- System components styles -->
 		<item name="android:alertDialogTheme">@style/ThemeOverlay.Kotatsu.AlertDialog</item>
@@ -164,71 +156,4 @@
 		<item name="android:colorBackground">@color/kotatsu_background</item>
 		<item name="android:panelColorBackground">@color/kotatsu_primaryContainer</item>
 	</style>
-
-	<!-- ═══ iOS 27 Liquid Glass Shapes ═══ -->
-
-	<!-- iOS small rounded corners (chips, badges) -->
-	<style name="ShapeAppearance.Kotich.Small" parent="ShapeAppearance.Material3.Corner.Small">
-		<item name="cornerSize">12dp</item>
-		<item name="cornerFamily">rounded</item>
-	</style>
-
-	<!-- iOS medium rounded corners (cards, buttons) -->
-	<style name="ShapeAppearance.Kotich.Medium" parent="ShapeAppearance.Material3.Corner.Medium">
-		<item name="cornerSize">16dp</item>
-		<item name="cornerFamily">rounded</item>
-	</style>
-
-	<!-- iOS large rounded corners (sheets, dialogs) -->
-	<style name="ShapeAppearance.Kotich.Large" parent="ShapeAppearance.Material3.Corner.Large">
-		<item name="cornerSize">24dp</item>
-		<item name="cornerFamily">rounded</item>
-	</style>
-
-	<!-- iOS 27 Floating Glass Tab Bar -->
-	<style name="Widget.Kotich.BottomNavigation" parent="Widget.Material3.BottomNavigationView">
-		<item name="backgroundTint">@android:color/transparent</item>
-		<item name="itemIconTint">@color/bottom_menu_active_item</item>
-		<item name="itemTextColor">@color/bottom_menu_active_item</item>
-		<item name="itemActiveIndicatorStyle">@style/Widget.Kotich.BottomNavigation.ActiveIndicator</item>
-		<item name="labelVisibilityMode">labeled</item>
-		<item name="itemIconSize">22dp</item>
-		<item name="itemPaddingTop">8dp</item>
-		<item name="itemPaddingBottom">8dp</item>
-		<item name="elevation">0dp</item>
-		<item name="android:minHeight">56dp</item>
-	</style>
-
-	<!-- iOS tab bar active indicator (subtle pill) -->
-	<style name="Widget.Kotich.BottomNavigation.ActiveIndicator" parent="">
-		<item name="android:color">@color/kotatsu_primaryContainer</item>
-		<item name="shapeAppearance">@style/ShapeAppearance.Kotich.Small</item>
-	</style>
-
-	<!-- iOS 27 Search Bar style -->
-	<style name="Widget.Kotich.SearchBar" parent="Widget.Material3.SearchBar">
-		<item name="shapeAppearance">@style/ShapeAppearance.Kotich.Small</item>
-		<item name="backgroundTint">@color/kotatsu_surfaceContainerHigh</item>
-		<item name="android:textColorHint">@color/kotatsu_onSurfaceVariant</item>
-	</style>
-
-	<!-- iOS 27 Cards (manga covers, list items) -->
-	<style name="Widget.Kotich.CardView" parent="Widget.Material3.CardView.Filled">
-		<item name="shapeAppearance">@style/ShapeAppearance.Kotich.Medium</item>
-		<item name="cardElevation">0dp</item>
-		<item name="strokeWidth">0dp</item>
-		<item name="cardBackgroundColor">@color/kotatsu_surfaceContainerLow</item>
-	</style>
-
-	<!-- iOS 27 Bottom Sheet (glass effect) -->
-	<style name="Widget.Kotich.BottomSheet" parent="Widget.Material3.BottomSheet">
-		<item name="shapeAppearance">@style/ShapeAppearance.Kotich.Large</item>
-		<item name="backgroundTint">@color/kotatsu_surfaceContainer</item>
-	</style>
-
-	<!-- iOS 27 FAB style -->
-	<style name="Widget.Kotich.FAB" parent="Widget.Material3.ExtendedFloatingActionButton.Primary">
-		<item name="shapeAppearance">@style/ShapeAppearance.Kotich.Medium</item>
-	</style>
 </resources>
-

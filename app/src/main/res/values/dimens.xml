@@ -11,10 +11,10 @@
 	<!-- Navigation -->
 	<dimen name="nav_bar_height_compact">0dp</dimen>
 
-	<dimen name="grid_spacing">10dp</dimen>
+	<dimen name="grid_spacing">8dp</dimen>
 	<dimen name="list_spacing">8dp</dimen>
-	<dimen name="grid_spacing_outer">4dp</dimen>
-	<dimen name="grid_spacing_outer_double">8dp</dimen>
+	<dimen name="grid_spacing_outer">2dp</dimen>
+	<dimen name="grid_spacing_outer_double">4dp</dimen>
 	<dimen name="manga_list_details_item_height">120dp</dimen>
 	<dimen name="recommendation_item_height">90dp</dimen>
 	<dimen name="bookmark_item_height">120dp</dimen>
@@ -82,5 +82,4 @@
 
 	<dimen name="chip_icon_corner">3dp</dimen>
 	<dimen name="read_button_min_width">92dp</dimen>
-    <dimen name="floating_tab_bar_padding">80dp</dimen>
 </resources>

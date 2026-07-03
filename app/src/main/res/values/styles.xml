@@ -243,11 +243,11 @@
 	<!-- Shapes -->
 
 	<style name="ShapeAppearanceOverlay.Kotatsu.Cover" parent="">
-		<item name="cornerSize">16dp</item>
+		<item name="cornerSize">12dp</item>
 	</style>
 
 	<style name="ShapeAppearanceOverlay.Kotatsu.Cover.Medium" parent="">
-		<item name="cornerSize">16dp</item>
+		<item name="cornerSize">8dp</item>
 	</style>
 
 	<style name="ShapeAppearanceOverlay.Kotatsu.Cover.Small" parent="">
@@ -317,7 +317,7 @@
 
 	<style name="FaviconDrawable.Large">
 		<item name="strokeWidth">1dp</item>
-		<item name="cornerSize">16dp</item>
+		<item name="cornerSize">12dp</item>
 	</style>
 
 	<style name="FaviconDrawable.Chip">
