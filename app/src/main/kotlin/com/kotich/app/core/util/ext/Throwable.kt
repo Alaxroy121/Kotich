@@ -1,5 +1,6 @@
 package com.kotich.app.core.util.ext
 
+import android.util.Log
 import android.content.ActivityNotFoundException
 import android.content.res.Resources
 import android.database.sqlite.SQLiteFullException
@@ -12,8 +13,6 @@ import okhttp3.internal.http2.StreamResetException
 import okio.FileNotFoundException
 import okio.IOException
 import okio.ProtocolException
-import org.acra.ktx.sendSilentlyWithAcra
-import org.acra.ktx.sendWithAcra
 import org.jsoup.HttpStatusException
 import com.kotich.app.BuildConfig
 import com.kotich.app.R
@@ -234,9 +233,9 @@ fun Throwable.isNetworkError(): Boolean {
 fun Throwable.report(silent: Boolean = false) {
     val exception = CaughtException(this)
     if (!silent) {
-        exception.sendWithAcra()
+        Log.e("Kotich", "Error reported", exception)
     } else if (!BuildConfig.DEBUG) {
-        exception.sendSilentlyWithAcra()
+        Log.w("Kotich", "Silent error", exception)
     }
 }
 

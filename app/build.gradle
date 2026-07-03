@@ -179,14 +179,9 @@ dependencies {
 	implementation libs.kizzyrpc
 
 	// ACRA crash reporting removed during rebrand
-	// implementation libs.acra.http
-	// implementation libs.acra.dialog
 
 	implementation libs.conscrypt.android
 
-	debugImplementation libs.leakcanary.android
-	nightlyImplementation libs.leakcanary.android
-	debugImplementation libs.workinspector
 
 	testImplementation libs.junit
 	testImplementation libs.json
