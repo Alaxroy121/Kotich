@@ -420,13 +420,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>(), AppBarOwner, BottomNav
 
 	private fun updateContainerBottomMargin() {
 		val bottomNavBar = viewBinding.bottomNav ?: return
-		val navParams = bottomNavBar.layoutParams as? MarginLayoutParams
-		val extraMargin = (navParams?.bottomMargin ?: 0) + (navParams?.topMargin ?: 0)
-		val newMargin = if (bottomNavBar.isPinned && bottomNavBar.isShownOrShowing) {
-			bottomNavBar.height + extraMargin
-		} else {
-			0
-		}
+		val newMargin = if (bottomNavBar.isPinned && bottomNavBar.isShownOrShowing) bottomNavBar.height else 0
 		with(viewBinding.container) {
 			val params = layoutParams as MarginLayoutParams
 			if (params.bottomMargin != newMargin) {

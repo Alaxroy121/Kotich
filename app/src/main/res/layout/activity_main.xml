@@ -79,19 +79,11 @@
 		tools:ignore="InconsistentLayout"
 		tools:visibility="visible" />
 
-	<!-- iOS 27 Liquid Glass Floating Tab Bar -->
 	<com.kotich.app.core.ui.widgets.SlidingBottomNavigationView
 		android:id="@+id/bottomNav"
 		android:layout_width="match_parent"
 		android:layout_height="wrap_content"
 		android:layout_gravity="bottom"
-		android:layout_marginStart="12dp"
-		android:layout_marginEnd="12dp"
-		android:layout_marginBottom="16dp"
-		android:background="@drawable/bg_glass_tab_bar"
-		android:elevation="8dp"
-		android:clipToPadding="false"
-		android:fitsSystemWindows="false"
-		app:layout_insetEdge="bottom" />
+		android:fitsSystemWindows="false" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

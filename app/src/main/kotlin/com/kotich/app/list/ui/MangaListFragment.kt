@@ -139,7 +139,7 @@ abstract class MangaListFragment :
 			left = barsInsets.left + basePadding,
 			top = basePadding,
 			right = barsInsets.right + basePadding,
-			bottom = barsInsets.bottom + basePadding + v.resources.getDimensionPixelOffset(R.dimen.floating_tab_bar_padding),
+			bottom = barsInsets.bottom + basePadding,
 		)
 		return insets.consumeAll(typeMask)
 	}
