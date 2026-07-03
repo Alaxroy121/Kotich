@@ -287,6 +287,6 @@ class CaptchaHandler @Inject constructor(
 		private const val GROUP_NOTIFICATION_ID = 34
 		private const val SETTINGS_ACTION_CODE = 3
 		private const val ACTION_DISCARD = "com.kotich.app.CAPTCHA_DISCARD"
-		private const val RESOLVE_TIMEOUT = 20_000L
+		private const val RESOLVE_TIMEOUT = 60_000L
 	}
 }

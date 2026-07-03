@@ -73,31 +73,44 @@ class WebViewExecutor @Inject constructor(
 	}
 
 	suspend fun tryResolveCaptcha(exception: CloudFlareException, timeout: Long): Boolean = mutex.withLock {
-		runCatchingCancellable {
-			withContext(Dispatchers.Main.immediate) {
-				val webView = obtainWebView()
-				try {
-					exception.source.getUserAgent()?.let {
-						webView.settings.userAgentString = it
-					}
-					withTimeout(timeout) {
-						suspendCancellableCoroutine { cont ->
-							webView.webViewClient = CaptchaContinuationClient(
-								cookieJar = cookieJar,
-								targetUrl = exception.url,
-								continuation = cont,
-							)
-							webView.loadUrl(exception.url)
+		// Auto-retry up to 3 times with increasing timeout
+		repeat(MAX_CAPTCHA_RETRIES) { attempt ->
+			val attemptTimeout = timeout * (attempt + 1)
+			val result = runCatchingCancellable {
+				withContext(Dispatchers.Main.immediate) {
+					val webView = obtainWebView()
+					try {
+						exception.source.getUserAgent()?.let {
+							webView.settings.userAgentString = it
 						}
+						// Enable JavaScript and DOM storage for captcha solving
+						webView.settings.javaScriptEnabled = true
+						webView.settings.domStorageEnabled = true
+						webView.settings.databaseEnabled = true
+						withTimeout(attemptTimeout) {
+							suspendCancellableCoroutine { cont ->
+								webView.webViewClient = CaptchaContinuationClient(
+									cookieJar = cookieJar,
+									targetUrl = exception.url,
+									continuation = cont,
+								)
+								webView.loadUrl(exception.url)
+							}
+						}
+					} finally {
+						webView.reset()
 					}
-				} finally {
-					webView.reset()
 				}
+			}.onFailure { e ->
+				e.printStackTraceDebug()
 			}
-		}.onFailure { e ->
-			exception.addSuppressed(e)
-			e.printStackTraceDebug()
-		}.isSuccess
+			if (result.isSuccess) return@withLock true
+		}
+		false
+	}
+
+	private companion object {
+		const val MAX_CAPTCHA_RETRIES = 3
 	}
 
 	private suspend fun obtainWebView(): WebView {

@@ -21,13 +21,17 @@ class CloudFlareInterceptor : Interceptor {
 				),
 			)
 
-			CloudFlareHelper.PROTECTION_CAPTCHA -> response.closeThrowing(
-				CloudFlareProtectedException(
-					url = request.url.toString(),
-					source = request.tag(MangaSource::class.java),
-					headers = request.headers,
-				),
-			)
+			CloudFlareHelper.PROTECTION_CAPTCHA -> {
+				// Auto-retry: close response and let CaptchaHandler resolve it
+				// The session cookies are persisted, so once solved it stays solved
+				response.closeThrowing(
+					CloudFlareProtectedException(
+						url = request.url.toString(),
+						source = request.tag(MangaSource::class.java),
+						headers = request.headers,
+					),
+				)
+			}
 
 			else -> response
 		}

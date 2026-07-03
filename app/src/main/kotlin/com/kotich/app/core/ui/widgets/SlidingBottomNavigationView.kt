@@ -52,17 +52,13 @@ class SlidingBottomNavigationView @JvmOverloads constructor(
 
 	init {
 		// iOS 27 Liquid Glass floating tab bar
-		post {
-			setBackgroundResource(R.drawable.bg_glass_tab_bar)
-			elevation = 8f * resources.displayMetrics.density
-			outlineProvider = object : ViewOutlineProvider() {
-				override fun getOutline(view: View, outline: Outline) {
-					val radius = 28f * resources.displayMetrics.density
-					outline.setRoundRect(0, 0, view.width, view.height, radius)
-				}
+		val density = resources.displayMetrics.density
+		outlineProvider = object : ViewOutlineProvider() {
+			override fun getOutline(view: View, outline: Outline) {
+				outline.setRoundRect(0, 0, view.width, view.height, 24f * density)
 			}
-			clipToOutline = true
 		}
+		clipToOutline = true
 	}
 
 	var isPinned: Boolean
