@@ -82,4 +82,5 @@
 
 	<dimen name="chip_icon_corner">3dp</dimen>
 	<dimen name="read_button_min_width">92dp</dimen>
+    <dimen name="floating_tab_bar_padding">80dp</dimen>
 </resources>
