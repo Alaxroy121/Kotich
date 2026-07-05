@@ -10,7 +10,6 @@ import androidx.fragment.app.viewModels
 import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.distinctUntilChangedBy
-import kotlinx.coroutines.flow.drop
 import com.kotich.app.R
 import com.kotich.app.core.model.getTitle
 import com.kotich.app.core.nav.router
@@ -44,7 +43,6 @@ class RemoteListFragment : MangaListFragment(), FilterCoordinator.Owner, View.On
         viewModel.onOpenManga.observeEvent(viewLifecycleOwner) { router.openDetails(it) }
         viewModel.onSourceBroken.observeEvent(viewLifecycleOwner) { showSourceBrokenWarning() }
         filterCoordinator.observe().distinctUntilChangedBy { it.listFilter.isEmpty() }
-            .drop(1)
             .observe(viewLifecycleOwner) {
                 activity?.invalidateMenu()
             }
