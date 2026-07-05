@@ -515,7 +515,5 @@
 		<item name="colorSurfaceContainer">@color/telegram_surface_container</item>
 		<item name="colorSurfaceContainerHigh">@color/telegram_surface_container_high</item>
 		<item name="colorSurfaceContainerHighest">@color/telegram_surface_container_highest</item>
-		<!-- Telegram gradient doodle wallpaper -->
-		<item name="android:windowBackground">@drawable/bg_telegram_gradient</item>
 	</style>
 </resources>
