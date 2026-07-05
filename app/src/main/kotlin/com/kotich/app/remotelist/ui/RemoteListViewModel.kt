@@ -109,7 +109,34 @@ open class RemoteListViewModel @Inject constructor(
 		filterCoordinator.observe()
 			.debounce(FILTER_MIN_INTERVAL)
 			.onEach { filterState ->
-				loadList(filterState, false)
+				// Increment loading counter BEFORE cancelling old job to prevent
+				// isLoading from briefly becoming false (which causes blank screen)
+				loadingCounter.increment()
+				if (loadingJob?.isActive == true) {
+					loadingJob?.cancelAndJoin()
+				} else {
+					loadingCounter.decrement()
+				}
+				mangaList.value = null
+				launchLoadingJob(Dispatchers.Default) {
+					try {
+						listError.value = null
+						val list = repository.getList(
+							offset = 0,
+							order = filterState.sortOrder,
+							filter = filterState.listFilter,
+						)
+						mangaList.value = list.distinctById()
+						hasNextPage.value = list.size > mangaList.value.orEmpty().size
+					} catch (e: CancellationException) {
+						throw e
+					} catch (e: Throwable) {
+						e.printStackTraceDebug()
+						listError.value = e
+						hasNextPage.value = false
+					}
+				}.also { loadingJob = it }
+				loadingCounter.decrement()
 			}.catch { error ->
 				listError.value = error
 			}.launchIn(viewModelScope)
