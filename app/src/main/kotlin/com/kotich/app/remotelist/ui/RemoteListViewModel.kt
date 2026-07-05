@@ -109,8 +109,6 @@ open class RemoteListViewModel @Inject constructor(
 		filterCoordinator.observe()
 			.debounce(FILTER_MIN_INTERVAL)
 			.onEach { filterState ->
-				loadingJob?.cancelAndJoin()
-				mangaList.value = null
 				loadList(filterState, false)
 			}.catch { error ->
 				listError.value = error
@@ -141,9 +139,6 @@ open class RemoteListViewModel @Inject constructor(
 	}
 
 	protected fun loadList(filterState: FilterCoordinator.Snapshot, append: Boolean): Job {
-		loadingJob?.let {
-			if (it.isActive) return it
-		}
 		return launchLoadingJob(Dispatchers.Default) {
 			try {
 				listError.value = null
