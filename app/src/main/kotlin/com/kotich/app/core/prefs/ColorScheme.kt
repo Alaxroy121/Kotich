@@ -25,6 +25,7 @@ enum class ColorScheme(
 	KANADE(R.style.ThemeOverlay_Kotatsu_Kanade, R.string.theme_name_kanade),
 	ITSUKA(R.style.ThemeOverlay_Kotatsu_Itsuka, R.string.theme_name_itsuka),
 	LIQUID(R.style.ThemeOverlay_Kotatsu_Liquid, R.string.theme_name_liquid),
+	TELEGRAM(R.style.ThemeOverlay_Kotatsu_Telegram, R.string.theme_name_telegram),
 	;
 
 	companion object {

@@ -479,4 +479,41 @@
 		<item name="colorSurfaceContainerHigh">@color/ios27_surface_container_high</item>
 		<item name="colorSurfaceContainerHighest">@color/ios27_surface_container_highest</item>
 	</style>
+	<!-- Telegram AMOLED -->
+	<style name="ThemeOverlay.Kotatsu.Telegram">
+		<item name="colorPrimary">@color/telegram_primary</item>
+		<item name="colorOnPrimary">@color/telegram_onPrimary</item>
+		<item name="colorPrimaryContainer">@color/telegram_primaryContainer</item>
+		<item name="colorOnPrimaryContainer">@color/telegram_onPrimaryContainer</item>
+		<item name="colorSecondary">@color/telegram_secondary</item>
+		<item name="colorOnSecondary">@color/telegram_onSecondary</item>
+		<item name="colorSecondaryContainer">@color/telegram_secondaryContainer</item>
+		<item name="colorOnSecondaryContainer">@color/telegram_onSecondaryContainer</item>
+		<item name="colorTertiary">@color/telegram_tertiary</item>
+		<item name="colorOnTertiary">@color/telegram_onTertiary</item>
+		<item name="colorTertiaryContainer">@color/telegram_tertiaryContainer</item>
+		<item name="colorOnTertiaryContainer">@color/telegram_onTertiaryContainer</item>
+		<item name="colorError">@color/telegram_error</item>
+		<item name="colorOnError">@color/telegram_on_error</item>
+		<item name="colorErrorContainer">@color/telegram_error_container</item>
+		<item name="colorOnErrorContainer">@color/telegram_on_error_container</item>
+		<item name="android:colorBackground">@color/telegram_background</item>
+		<item name="colorOnBackground">@color/telegram_on_background</item>
+		<item name="colorSurface">@color/telegram_surface</item>
+		<item name="colorOnSurface">@color/telegram_on_surface</item>
+		<item name="colorSurfaceVariant">@color/telegram_surface_variant</item>
+		<item name="colorOnSurfaceVariant">@color/telegram_on_surface_variant</item>
+		<item name="colorOutline">@color/telegram_outline</item>
+		<item name="colorOutlineVariant">@color/telegram_outline_variant</item>
+		<item name="colorSurfaceInverse">@color/telegram_inverse_surface</item>
+		<item name="colorOnSurfaceInverse">@color/telegram_inverse_on_surface</item>
+		<item name="colorPrimaryInverse">@color/telegram_inversePrimary</item>
+		<item name="colorSurfaceDim">@color/telegram_surface_dim</item>
+		<item name="colorSurfaceBright">@color/telegram_surface_bright</item>
+		<item name="colorSurfaceContainerLowest">@color/telegram_surface_container_lowest</item>
+		<item name="colorSurfaceContainerLow">@color/telegram_surface_container_low</item>
+		<item name="colorSurfaceContainer">@color/telegram_surface_container</item>
+		<item name="colorSurfaceContainerHigh">@color/telegram_surface_container_high</item>
+		<item name="colorSurfaceContainerHighest">@color/telegram_surface_container_highest</item>
+	</style>
 </resources>

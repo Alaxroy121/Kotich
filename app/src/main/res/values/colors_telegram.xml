@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Telegram AMOLED Dark Theme
+  ~ Pure black background, bright blue accent, clean white text
+-->
+<resources>
+	<!-- Primary: Bright blue accent #48A5F6 -->
+	<color name="telegram_primary">#48A5F6</color>
+	<color name="telegram_onPrimary">#FFFFFF</color>
+	<color name="telegram_primaryContainer">#0D3B66</color>
+	<color name="telegram_onPrimaryContainer">#D1E8FF</color>
+	<color name="telegram_inversePrimary">#1A5C99</color>
+
+	<!-- Secondary: Sent message gradient blue -->
+	<color name="telegram_secondary">#3A7BD5</color>
+	<color name="telegram_onSecondary">#FFFFFF</color>
+	<color name="telegram_secondaryContainer">#1A3A5C</color>
+	<color name="telegram_onSecondaryContainer">#D1E4FF</color>
+
+	<!-- Tertiary: Cyan for highlights -->
+	<color name="telegram_tertiary">#7EBDE1</color>
+	<color name="telegram_onTertiary">#003544</color>
+	<color name="telegram_tertiaryContainer">#004D64</color>
+	<color name="telegram_onTertiaryContainer">#B8EAFF</color>
+
+	<!-- Error -->
+	<color name="telegram_error">#FF453A</color>
+	<color name="telegram_on_error">#FFFFFF</color>
+	<color name="telegram_error_container">#8B0000</color>
+	<color name="telegram_on_error_container">#FFDAD4</color>
+
+	<!-- Backgrounds: Pure black -->
+	<color name="telegram_background">#000000</color>
+	<color name="telegram_on_background">#E5E5EA</color>
+
+	<!-- Surfaces: AMOLED black + dark gray cards -->
+	<color name="telegram_surface">#000000</color>
+	<color name="telegram_on_surface">#FFFFFF</color>
+	<color name="telegram_surface_variant">#1E1E1E</color>
+	<color name="telegram_on_surface_variant">#AAAAAA</color>
+	<color name="telegram_outline">#48484A</color>
+	<color name="telegram_outline_variant">#2C2C2E</color>
+	<color name="telegram_inverse_surface">#E5E5EA</color>
+	<color name="telegram_inverse_on_surface">#1C1C1E</color>
+
+	<!-- Surface containers: dark gray hierarchy -->
+	<color name="telegram_surface_dim">#000000</color>
+	<color name="telegram_surface_bright">#1C1C1E</color>
+	<color name="telegram_surface_container_lowest">#000000</color>
+	<color name="telegram_surface_container_low">#0A0A0A</color>
+	<color name="telegram_surface_container">#141414</color>
+	<color name="telegram_surface_container_high">#1E1E1E</color>
+	<color name="telegram_surface_container_highest">#2C2C2E</color>
+</resources>
