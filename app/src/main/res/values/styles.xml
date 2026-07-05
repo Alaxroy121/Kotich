@@ -456,7 +456,6 @@
 		<item name="itemIconTint">@color/ios_tab_item_color</item>
 		<item name="itemTextColor">@color/ios_tab_item_color</item>
 		<item name="itemIconSize">24dp</item>
-		<item name="itemActiveIndicatorColor">@android:color/transparent</item>
 		<item name="android:minHeight">52dp</item>
 		<item name="labelVisibilityMode">labeled</item>
 	</style>
