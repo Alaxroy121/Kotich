@@ -456,15 +456,9 @@
 		<item name="itemIconTint">@color/ios_tab_item_color</item>
 		<item name="itemTextColor">@color/ios_tab_item_color</item>
 		<item name="itemIconSize">24dp</item>
-		<item name="itemActiveIndicatorStyle">@style/Widget.Kotich.iOS.TabBar.Indicator</item>
+		<item name="itemActiveIndicatorColor">@android:color/transparent</item>
 		<item name="android:minHeight">52dp</item>
 		<item name="labelVisibilityMode">labeled</item>
-	</style>
-
-	<style name="Widget.Kotich.iOS.TabBar.Indicator" parent="Widget.Material3.BottomNavigationView.ActiveIndicator">
-		<item name="android:color">@android:color/transparent</item>
-		<item name="android:width">0dp</item>
-		<item name="android:height">0dp</item>
 	</style>
 
 </resources>

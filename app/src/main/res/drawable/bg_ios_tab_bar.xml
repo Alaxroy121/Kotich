@@ -11,9 +11,11 @@
 		</shape>
 	</item>
 	<!-- Top separator line -->
-	<item android:top="0dp" android:bottom="auto">
+	<item
+		android:bottom="-1dp"
+		android:top="0dp">
 		<shape android:shape="rectangle">
-			<size android:height="0.5dp" />
+			<size android:height="1dp" />
 			<solid android:color="#33C6C6C8" />
 		</shape>
 	</item>
