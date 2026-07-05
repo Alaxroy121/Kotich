@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
+	xmlns:tools="http://schemas.android.com/tools"
+	android:layout_width="match_parent"
+	android:layout_height="wrap_content"
+	android:layout_marginVertical="4dp">
+
+	<com.kotich.app.image.ui.CoverImageView
+		android:id="@+id/imageView_preview"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:background="?colorSurfaceContainerHigh"
+		android:scaleType="centerCrop"
+		app:aspectRationHeight="18"
+		app:aspectRationWidth="13"
+		app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.Kotatsu.Cover.Medium"
+		app:useExistingDrawable="true"
+		tools:ignore="ContentDescription"
+		tools:src="@tools:sample/backgrounds/scenic" />
+
+	<!-- Page number badge -->
+	<TextView
+		android:id="@+id/textView_page_number"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:layout_gravity="bottom|start"
+		android:layout_margin="8dp"
+		android:background="@drawable/bg_badge_empty"
+		android:paddingHorizontal="8dp"
+		android:paddingVertical="2dp"
+		android:textAppearance="?attr/textAppearanceLabelSmall"
+		android:textColor="?colorOnSurface"
+		tools:text="Page 1" />
+
+</FrameLayout>

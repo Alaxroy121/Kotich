@@ -126,7 +126,10 @@ class ChaptersFragment :
 	}
 
 	override fun onItemLongClick(item: ChapterListItem, view: View): Boolean {
-		return selectionController?.onItemLongClick(view, item.chapter.id) == true
+		// Show chapter preview on long-press
+		val sheet = ChapterPreviewSheet.newInstance(item.chapter.id)
+		sheet.show(childFragmentManager, ChapterPreviewSheet.TAG)
+		return true
 	}
 
 	override fun onItemContextClick(item: ChapterListItem, view: View): Boolean {

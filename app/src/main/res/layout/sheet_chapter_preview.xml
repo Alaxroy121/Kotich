@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
+	xmlns:tools="http://schemas.android.com/tools"
+	android:layout_width="match_parent"
+	android:layout_height="match_parent"
+	android:orientation="vertical"
+	android:background="?colorSurface">
+
+	<!-- Drag handle -->
+	<View
+		android:layout_width="40dp"
+		android:layout_height="4dp"
+		android:layout_gravity="center_horizontal"
+		android:layout_marginTop="12dp"
+		android:layout_marginBottom="8dp"
+		android:background="@drawable/bg_ios_drag_handle" />
+
+	<!-- Header -->
+	<LinearLayout
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:gravity="center_vertical"
+		android:orientation="horizontal"
+		android:paddingHorizontal="20dp"
+		android:paddingBottom="12dp">
+
+		<LinearLayout
+			android:layout_width="0dp"
+			android:layout_height="wrap_content"
+			android:layout_weight="1"
+			android:orientation="vertical">
+
+			<TextView
+				android:id="@+id/textView_chapter_title"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:ellipsize="end"
+				android:maxLines="1"
+				android:textAppearance="?attr/textAppearanceTitleMedium"
+				android:textStyle="bold"
+				tools:text="Chapter 5 - The Beginning" />
+
+			<TextView
+				android:id="@+id/textView_chapter_info"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:layout_marginTop="2dp"
+				android:textAppearance="?attr/textAppearanceBodySmall"
+				android:textColor="?colorOnSurfaceVariant"
+				tools:text="20 pages • showing 10 previews" />
+
+		</LinearLayout>
+
+		<ImageButton
+			android:id="@+id/button_close"
+			android:layout_width="40dp"
+			android:layout_height="40dp"
+			android:background="?selectableItemBackgroundBorderless"
+			android:contentDescription="@string/close"
+			android:scaleType="center"
+			app:srcCompat="@drawable/abc_ic_clear_material"
+			app:tint="?colorOnSurfaceVariant" />
+
+	</LinearLayout>
+
+	<!-- Loading indicator -->
+	<com.google.android.material.progressindicator.LinearProgressIndicator
+		android:id="@+id/progressBar"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:indeterminate="true"
+		android:visibility="gone"
+		app:indicatorColor="?colorPrimary"
+		tools:visibility="visible" />
+
+	<!-- Error message -->
+	<TextView
+		android:id="@+id/textView_error"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:gravity="center"
+		android:padding="32dp"
+		android:textAppearance="?attr/textAppearanceBodyMedium"
+		android:textColor="?colorOnSurfaceVariant"
+		android:visibility="gone"
+		tools:text="No preview available" />
+
+	<!-- Preview images grid -->
+	<androidx.recyclerview.widget.RecyclerView
+		android:id="@+id/recyclerView_preview"
+		android:layout_width="match_parent"
+		android:layout_height="0dp"
+		android:layout_weight="1"
+		android:clipToPadding="false"
+		android:paddingHorizontal="12dp"
+		android:paddingTop="4dp"
+		android:paddingBottom="16dp"
+		app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+		android:orientation="vertical" />
+
+</LinearLayout>
