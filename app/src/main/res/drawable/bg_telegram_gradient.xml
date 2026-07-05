@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  Telegram-style gradient background.
+  Warm pink/red → purple → cool teal/blue
+-->
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+	android:shape="rectangle">
+	<gradient
+		android:angle="160"
+		android:startColor="#E8456B"
+		android:centerColor="#9B59B6"
+		android:endColor="#2ECCB4"
+		android:type="linear" />
+</shape>

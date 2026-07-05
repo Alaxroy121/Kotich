@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  Telegram-style wallpaper: gradient base + scattered doodle patterns.
+  Applied to chat/content area backgrounds.
+-->
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+	<!-- Base gradient: pink → purple → teal -->
+	<item>
+		<shape android:shape="rectangle">
+			<gradient
+				android:angle="160"
+				android:startColor="#E8456B"
+				android:centerColor="#9B59B6"
+				android:endColor="#2ECCB4"
+				android:type="linear" />
+		</shape>
+	</item>
+	<!-- Semi-transparent overlay to darken slightly -->
+	<item>
+		<shape android:shape="rectangle">
+			<solid android:color="#33000000" />
+		</shape>
+	</item>
+</layer-list>

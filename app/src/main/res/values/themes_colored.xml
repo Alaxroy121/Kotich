@@ -479,7 +479,7 @@
 		<item name="colorSurfaceContainerHigh">@color/ios27_surface_container_high</item>
 		<item name="colorSurfaceContainerHighest">@color/ios27_surface_container_highest</item>
 	</style>
-	<!-- Telegram AMOLED -->
+	<!-- Telegram AMOLED with gradient doodle wallpaper -->
 	<style name="ThemeOverlay.Kotatsu.Telegram">
 		<item name="colorPrimary">@color/telegram_primary</item>
 		<item name="colorOnPrimary">@color/telegram_onPrimary</item>
@@ -515,5 +515,7 @@
 		<item name="colorSurfaceContainer">@color/telegram_surface_container</item>
 		<item name="colorSurfaceContainerHigh">@color/telegram_surface_container_high</item>
 		<item name="colorSurfaceContainerHighest">@color/telegram_surface_container_highest</item>
+		<!-- Telegram gradient doodle wallpaper -->
+		<item name="android:windowBackground">@drawable/bg_telegram_gradient</item>
 	</style>
 </resources>

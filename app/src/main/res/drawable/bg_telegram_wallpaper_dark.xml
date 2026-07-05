@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  Telegram-style wallpaper — AMOLED variant.
+  Darker gradient with more black mixed in.
+-->
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+	<!-- Dark base -->
+	<item>
+		<shape android:shape="rectangle">
+			<solid android:color="#000000" />
+		</shape>
+	</item>
+	<!-- Gradient overlay with transparency -->
+	<item>
+		<shape android:shape="rectangle">
+			<gradient
+				android:angle="160"
+				android:startColor="#4D1A0A1A"
+				android:centerColor="#4D0D0D1A"
+				android:endColor="#4D0A1A15"
+				android:type="linear" />
+		</shape>
+	</item>
+</layer-list>
