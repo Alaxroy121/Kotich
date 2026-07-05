@@ -52,6 +52,7 @@ import com.kotich.app.core.nav.router
 import com.kotich.app.core.os.AppShortcutManager
 import com.kotich.app.core.parser.favicon.faviconUri
 import com.kotich.app.core.prefs.AppSettings
+import com.kotich.app.core.prefs.ColorScheme
 import com.kotich.app.core.ui.BaseActivity
 import com.kotich.app.core.ui.BaseListAdapter
 import com.kotich.app.core.ui.dialog.buildAlertDialog
@@ -202,8 +203,22 @@ class DetailsActivity :
 			viewModel = viewModel,
 			snackbarHost = viewBinding.scrollView,
 			appShortcutManager = shortcutManager,
+			settings = settings,
 		)
 		addMenuProvider(menuProvider)
+
+		// iOS 27 Liquid Glass enhancements
+		if (settings.colorScheme == ColorScheme.LIQUID) {
+			// Make toolbar transparent for hero overlay effect
+			viewBinding.appbar.setBackgroundColor(android.graphics.Color.TRANSPARENT)
+			viewBinding.appbar.elevation = 0f
+
+			// Apply glass card style to bottom sheet
+			viewBinding.containerBottomSheet?.let { sheet ->
+				val glassBg = androidx.core.content.ContextCompat.getColor(this, R.color.ios27_glass_white)
+				sheet.setBackgroundColor(glassBg)
+			}
+		}
 	}
 
 	override fun onProvideAssistContent(outContent: AssistContent) {
@@ -418,6 +433,16 @@ class DetailsActivity :
 			textViewNsfw16.isVisible = manga.contentRating == ContentRating.SUGGESTIVE
 			textViewNsfw18.isVisible = manga.contentRating == ContentRating.ADULT
 			textViewDescription.text = details.description.ifNullOrEmpty { getString(R.string.no_description) }
+		}
+		// iOS 27 Liquid Glass: semi-transparent gradient scrim on toolbar
+		if (settings.colorScheme == ColorScheme.LIQUID) {
+			viewBinding.appbar.background = android.graphics.drawable.GradientDrawable(
+				android.graphics.drawable.GradientDrawable.Orientation.TOP_BOTTOM,
+				intArrayOf(
+					android.graphics.Color.argb(140, 0, 0, 0),
+					android.graphics.Color.TRANSPARENT,
+				)
+			)
 		}
 		with(infoBinding) {
 			val translation = details.getLocale()

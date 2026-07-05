@@ -18,6 +18,7 @@ import dagger.hilt.android.AndroidEntryPoint
 import com.kotich.app.R
 import com.kotich.app.core.model.titleResId
 import com.kotich.app.core.nav.router
+import com.kotich.app.core.prefs.ColorScheme
 import com.kotich.app.core.ui.sheet.BaseAdaptiveSheet
 import com.kotich.app.core.ui.widgets.ChipsView
 import com.kotich.app.core.util.ext.consume
@@ -52,6 +53,23 @@ class WelcomeSheet : BaseAdaptiveSheet<SheetWelcomeBinding>(), ChipsView.OnChipC
 		binding.chipBackup.setOnClickListener(this)
 		binding.chipSync.setOnClickListener(this)
 		binding.chipDirectories.setOnClickListener(this)
+
+		// iOS 27 Liquid Glass: apply glass styling to welcome sheet
+		try {
+			val entryPoint = dagger.hilt.android.EntryPointAccessors.fromApplication<
+				com.kotich.app.core.ui.BaseActivityEntryPoint
+			>(requireContext().applicationContext)
+			if (entryPoint.settings.colorScheme == ColorScheme.LIQUID) {
+				binding.root.setBackgroundColor(
+					androidx.core.content.ContextCompat.getColor(requireContext(), R.color.ios27_glass_white)
+				)
+				binding.textViewWelcomeTitle.setTextColor(
+					androidx.core.content.ContextCompat.getColor(requireContext(), R.color.ios27_blue)
+				)
+			}
+		} catch (_: Exception) {
+			// Entry point not available, skip styling
+		}
 
 		viewModel.locales.observe(viewLifecycleOwner, ::onLocalesChanged)
 		viewModel.types.observe(viewLifecycleOwner, ::onTypesChanged)

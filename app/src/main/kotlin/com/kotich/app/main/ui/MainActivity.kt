@@ -51,6 +51,7 @@ import com.kotich.app.core.exceptions.resolve.SnackbarErrorObserver
 import com.kotich.app.core.nav.router
 import com.kotich.app.core.os.VoiceInputContract
 import com.kotich.app.core.prefs.AppSettings
+import com.kotich.app.core.prefs.ColorScheme
 import com.kotich.app.core.prefs.NavItem
 import com.kotich.app.core.ui.BaseActivity
 import com.kotich.app.core.ui.util.FadingAppbarMediator
@@ -157,6 +158,14 @@ class MainActivity : BaseActivity<ActivityMainBinding>(), AppBarOwner, BottomNav
 		viewBinding.searchView.addTransitionListener(this)
 		viewBinding.searchView.addTransitionListener(exitCallback)
 		initSearch()
+
+		// iOS 27 Liquid Glass: large title style + glass search bar
+		if (settings.colorScheme == ColorScheme.LIQUID) {
+			viewBinding.searchBar.setText("")
+			viewBinding.searchBar.setBackgroundColor(
+				androidx.core.content.ContextCompat.getColor(this, R.color.ios27_glass_fill_secondary)
+			)
+		}
 	}
 
 	override fun onRestoreInstanceState(savedInstanceState: Bundle) {

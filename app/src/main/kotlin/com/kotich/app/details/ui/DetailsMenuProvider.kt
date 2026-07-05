@@ -8,8 +8,10 @@ import android.view.View
 import androidx.activity.result.ActivityResult
 import androidx.activity.result.ActivityResultCallback
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.core.content.ContextCompat
 import androidx.core.content.pm.ShortcutManagerCompat
 import androidx.core.view.MenuProvider
+import androidx.core.view.forEach
 import androidx.fragment.app.FragmentActivity
 import androidx.lifecycle.lifecycleScope
 import com.google.android.material.snackbar.Snackbar
@@ -19,6 +21,8 @@ import com.kotich.app.core.model.LocalMangaSource
 import com.kotich.app.core.nav.AppRouter
 import com.kotich.app.core.nav.router
 import com.kotich.app.core.os.AppShortcutManager
+import com.kotich.app.core.prefs.AppSettings
+import com.kotich.app.core.prefs.ColorScheme
 import com.kotich.app.core.ui.dialog.buildAlertDialog
 import com.kotich.app.core.util.ext.isHttpUrl
 
@@ -27,6 +31,7 @@ class DetailsMenuProvider(
 	private val viewModel: DetailsViewModel,
 	private val snackbarHost: View,
 	private val appShortcutManager: AppShortcutManager,
+	private val settings: AppSettings,
 ) : MenuProvider, ActivityResultCallback<ActivityResult> {
 
 	private val activityForResultLauncher = activity.registerForActivityResult(
@@ -52,6 +57,14 @@ class DetailsMenuProvider(
 		menu.findItem(R.id.action_scrobbling).isVisible = viewModel.isScrobblingAvailable
 		menu.findItem(R.id.action_online).isVisible = viewModel.remoteManga.value != null
 		menu.findItem(R.id.action_stats).isVisible = viewModel.isStatsAvailable.value
+
+		// iOS 27 Liquid Glass: tint action icons with iOS blue
+		if (settings.colorScheme == ColorScheme.LIQUID) {
+			val iosBlue = ContextCompat.getColor(activity, R.color.ios27_blue)
+			menu.forEach { item ->
+				item.icon?.setTint(iosBlue)
+			}
+		}
 	}
 
 	override fun onMenuItemSelected(menuItem: MenuItem): Boolean {

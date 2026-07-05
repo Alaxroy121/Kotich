@@ -26,6 +26,7 @@ import com.kotich.app.BuildConfig
 import com.kotich.app.R
 import com.kotich.app.core.exceptions.resolve.ExceptionResolver
 import com.kotich.app.core.nav.AppRouter
+import com.kotich.app.core.prefs.ColorScheme
 import com.kotich.app.core.ui.util.ActionModeDelegate
 import com.kotich.app.core.util.ext.isWebViewUnavailable
 import com.kotich.app.main.ui.protect.ScreenshotPolicyHelper
@@ -67,6 +68,19 @@ abstract class BaseActivity<B : ViewBinding> :
 		putDataToExtras(intent)
 		exceptionResolver = entryPoint.exceptionResolverFactory.create(this)
 		enableEdgeToEdge()
+		// iOS 27 Liquid Glass: translucent system bars
+		if (settings.colorScheme == ColorScheme.LIQUID) {
+			val isNightMode = resources.configuration.uiMode and
+				android.content.res.Configuration.UI_MODE_NIGHT_MASK ==
+				android.content.res.Configuration.UI_MODE_NIGHT_YES
+			window.statusBarColor = android.graphics.Color.TRANSPARENT
+			window.navigationBarColor = androidx.core.content.ContextCompat.getColor(
+				this, R.color.ios27_glass_white
+			)
+			val controller = androidx.core.view.WindowCompat.getInsetsController(window, window.decorView)
+			controller.isAppearanceLightStatusBars = !isNightMode
+			controller.isAppearanceLightNavigationBars = !isNightMode
+		}
 		super.onCreate(savedInstanceState)
 	}
 

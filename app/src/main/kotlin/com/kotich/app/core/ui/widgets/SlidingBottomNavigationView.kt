@@ -5,6 +5,8 @@ import android.animation.AnimatorListenerAdapter
 import android.animation.TimeInterpolator
 import android.annotation.SuppressLint
 import android.content.Context
+import android.graphics.Color
+import android.graphics.drawable.GradientDrawable
 import android.os.Parcel
 import android.os.Parcelable
 import android.util.AttributeSet
@@ -13,12 +15,14 @@ import android.view.ViewPropertyAnimator
 import androidx.annotation.AttrRes
 import androidx.annotation.StyleRes
 import androidx.coordinatorlayout.widget.CoordinatorLayout
+import androidx.core.content.ContextCompat
 import androidx.core.view.isVisible
 import androidx.customview.view.AbsSavedState
 import androidx.interpolator.view.animation.FastOutLinearInInterpolator
 import androidx.interpolator.view.animation.LinearOutSlowInInterpolator
 import com.google.android.material.bottomnavigation.BottomNavigationMenuView
 import com.google.android.material.navigation.NavigationBarView
+import com.kotich.app.R
 import com.kotich.app.core.util.ext.applySystemAnimatorScale
 import com.kotich.app.core.util.ext.measureHeight
 import kotlin.math.max
@@ -58,6 +62,45 @@ class SlidingBottomNavigationView @JvmOverloads constructor(
 
 	val isShownOrShowing: Boolean
 		get() = isVisible && currentState == STATE_UP
+
+	private fun applyLiquidGlassStyling() {
+		// Slightly taller height (+4dp)
+		val extraHeight = (4 * resources.displayMetrics.density).toInt()
+		minimumHeight = minimumHeight + extraHeight
+
+		// Glass white background
+		setBackgroundColor(ContextCompat.getColor(context, R.color.ios27_glass_white))
+
+		// Subtle top border divider
+		val divider = GradientDrawable().apply {
+			setStroke(1, ContextCompat.getColor(context, R.color.ios27_glass_border))
+			setColor(Color.TRANSPARENT)
+		}
+		background = android.graphics.drawable.LayerDrawable(arrayOf(divider, background))
+	}
+
+	override fun onAttachedToWindow() {
+		super.onAttachedToWindow()
+		// Detect iOS 27 Liquid theme by checking for the tint blue color attribute
+		try {
+			val typedValue = android.util.TypedValue()
+			context.theme.resolveAttribute(R.attr.colorPrimary, typedValue, true)
+			// If the theme has ios27 resources, the glass fill color should be available
+			val glassFill = ContextCompat.getColor(context, R.color.ios27_glass_fill_secondary)
+			if (glassFill != 0) {
+				// Check if current theme is Liquid by looking at the colorPrimary
+				// The Liquid theme uses a specific blue primary color
+				val primaryBlue = 0xFF007AFF.toInt()
+				if (typedValue.data == primaryBlue ||
+					typedValue.data == android.graphics.Color.argb(255, 0, 122, 255)
+				) {
+					applyLiquidGlassStyling()
+				}
+			}
+		} catch (_: Exception) {
+			// Resource not available, not the Liquid theme
+		}
+	}
 
 	override fun getBehavior(): CoordinatorLayout.Behavior<*> {
 		return behavior
