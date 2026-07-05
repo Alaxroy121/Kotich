@@ -443,7 +443,7 @@
 		<item name="colorSurfaceContainerHighest">@color/sakura_surfaceContainerHighest</item>
 	</style>
 	<!-- Liquid (iOS 27) -->
-	<style name="ThemeOverlay.Kotatsu.Liquid">
+	<style name="ThemeOverlay.Kotatsu.Liquid" parent="ThemeOverlay.Material3.Light">
 		<item name="colorPrimary">@color/ios27_primary</item>
 		<item name="colorOnPrimary">@color/ios27_onPrimary</item>
 		<item name="colorPrimaryContainer">@color/ios27_primaryContainer</item>
@@ -482,7 +482,7 @@
 		<item name="bottomNavigationStyle">@style/Widget.Kotich.iOS.TabBar</item>
 	</style>
 	<!-- Telegram AMOLED with gradient doodle wallpaper -->
-	<style name="ThemeOverlay.Kotatsu.Telegram">
+	<style name="ThemeOverlay.Kotatsu.Telegram" parent="ThemeOverlay.Material3.Dark">
 		<item name="colorPrimary">@color/telegram_primary</item>
 		<item name="colorOnPrimary">@color/telegram_onPrimary</item>
 		<item name="colorPrimaryContainer">@color/telegram_primaryContainer</item>
