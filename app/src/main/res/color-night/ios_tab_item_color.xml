@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  iOS tab bar item colors — dark mode.
+  Selected: bright blue (#48A5F6)
+  Unselected: system gray (#8E8E93)
+-->
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+	<item android:color="#48A5F6" android:state_checked="true" />
+	<item android:color="#636366" android:state_checked="false" />
+</selector>

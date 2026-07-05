@@ -122,6 +122,7 @@
 		<item name="bottomSheetDialogTheme">@style/ThemeOverlay.Kotich.iOS27.BottomSheetDialog</item>
 		<item name="bottomSheetDragHandleStyle">@style/Widget.Kotich.iOS.DragHandle</item>
 		<item name="materialSearchBarStyle">@style/Widget.Kotich.iOS.SearchBar</item>
+		<item name="bottomNavigationStyle">@style/Widget.Kotich.iOS.TabBar</item>
 	</style>
 
 	<!-- iOS 27 Bottom Sheet Dialog -->
