@@ -76,8 +76,9 @@
 		<item name="coverImageViewStyle">@style/Widget.Kotatsu.ImageView.Cover</item>
 	</style>
 
-	<!--== iOS 27 "Liquid Glass" Theme ==-->
+	<!--== iOS 27 "Liquid Glass" Theme (forced light — iOS 27 is a light design) ==-->
 	<style name="Theme.Kotich.iOS27" parent="Base.Theme.Kotatsu">
+		<item name="android:colorBackground">@color/ios27_background</item>
 		<!-- Override primary colors with iOS blue -->
 		<item name="colorPrimary">@color/ios27_primary</item>
 		<item name="colorPrimaryContainer">@color/ios27_primaryContainer</item>

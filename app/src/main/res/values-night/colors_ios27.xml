@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+	<!-- iOS 27 Glass Colors — Dark Mode -->
+	<color name="ios27_glass_white">#99000000</color>
+	<color name="ios27_glass_white_light">#66000000</color>
+	<color name="ios27_glass_white_ultra">#80000000</color>
+	<color name="ios27_glass_border">#33FFFFFF</color>
+	<color name="ios27_glass_fill_secondary">#663A3A3C</color>
+	<color name="ios27_glass_tint_blue">#1A0A84FF</color>
+</resources>
