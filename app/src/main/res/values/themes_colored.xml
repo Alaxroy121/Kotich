@@ -478,6 +478,8 @@
 		<item name="colorSurfaceContainer">@color/ios27_surface_container</item>
 		<item name="colorSurfaceContainerHigh">@color/ios27_surface_container_high</item>
 		<item name="colorSurfaceContainerHighest">@color/ios27_surface_container_highest</item>
+		<!-- iOS Tab Bar -->
+		<item name="bottomNavigationStyle">@style/Widget.Kotich.iOS.TabBar</item>
 	</style>
 	<!-- Telegram AMOLED with gradient doodle wallpaper -->
 	<style name="ThemeOverlay.Kotatsu.Telegram">
