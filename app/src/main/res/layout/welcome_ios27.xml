@@ -1,0 +1,253 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  iOS 27 "Liquid Glass" Welcome / Onboarding Screen
+  Clean, minimal layout with large title, feature cards, and pill button.
+-->
+<ScrollView
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
+	xmlns:tools="http://schemas.android.com/tools"
+	android:layout_width="match_parent"
+	android:layout_height="match_parent"
+	android:background="@color/ios27_background"
+	android:fillViewport="true"
+	android:overScrollMode="never">
+
+	<LinearLayout
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:gravity="center_horizontal"
+		android:orientation="vertical"
+		android:paddingStart="24dp"
+		android:paddingEnd="24dp"
+		android:paddingTop="80dp"
+		android:paddingBottom="48dp">
+
+		<!-- App Icon / Logo Area -->
+		<ImageView
+			android:layout_width="96dp"
+			android:layout_height="96dp"
+			android:layout_marginBottom="24dp"
+			android:contentDescription="@string/app_name"
+			android:scaleType="centerCrop"
+			tools:ignore="ContentDescription"
+			tools:src="@tools:sample/backgrounds/scenic" />
+
+		<!-- Large iOS-style Title -->
+		<TextView
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:layout_marginBottom="8dp"
+			android:fontFamily="sans-serif-bold"
+			android:gravity="center"
+			android:text="Welcome to Kotich"
+			android:textAppearance="@style/TextAppearance.Kotich.iOS.Title"
+			android:textSize="@dimen/ios_large_title_size" />
+
+		<!-- Subtitle -->
+		<TextView
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:layout_marginBottom="48dp"
+			android:fontFamily="sans-serif"
+			android:gravity="center"
+			android:lineSpacingMultiplier="1.3"
+			android:text="Your manga reader, reimagined with\na beautiful Liquid Glass interface"
+			android:textAppearance="@style/TextAppearance.Kotich.iOS.Caption"
+			android:textSize="16sp" />
+
+		<!-- ===== Feature Card 1: Browse ===== -->
+		<LinearLayout
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:layout_marginBottom="12dp"
+			android:background="@drawable/bg_ios_feature_card"
+			android:gravity="center_vertical"
+			android:orientation="horizontal"
+			android:padding="16dp">
+
+			<ImageView
+				android:layout_width="48dp"
+				android:layout_height="48dp"
+				android:layout_marginEnd="16dp"
+				android:contentDescription="Browse"
+				android:src="@drawable/ic_ios_explore"
+				tools:ignore="ContentDescription" />
+
+			<LinearLayout
+				android:layout_width="0dp"
+				android:layout_height="wrap_content"
+				android:layout_weight="1"
+				android:orientation="vertical">
+
+				<TextView
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+					android:fontFamily="sans-serif-medium"
+					android:text="Discover Manga"
+					android:textAppearance="@style/TextAppearance.Kotich.iOS.Body"
+					android:textStyle="bold" />
+
+				<TextView
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+					android:layout_marginTop="2dp"
+					android:text="Browse 1200+ sources with powerful search and filters"
+					android:textAppearance="@style/TextAppearance.Kotich.iOS.Caption" />
+
+			</LinearLayout>
+
+		</LinearLayout>
+
+		<!-- ===== Feature Card 2: Library ===== -->
+		<LinearLayout
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:layout_marginBottom="12dp"
+			android:background="@drawable/bg_ios_feature_card"
+			android:gravity="center_vertical"
+			android:orientation="horizontal"
+			android:padding="16dp">
+
+			<ImageView
+				android:layout_width="48dp"
+				android:layout_height="48dp"
+				android:layout_marginEnd="16dp"
+				android:contentDescription="Library"
+				android:src="@drawable/ic_ios_heart"
+				tools:ignore="ContentDescription" />
+
+			<LinearLayout
+				android:layout_width="0dp"
+				android:layout_height="wrap_content"
+				android:layout_weight="1"
+				android:orientation="vertical">
+
+				<TextView
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+					android:fontFamily="sans-serif-medium"
+					android:text="Your Library"
+					android:textAppearance="@style/TextAppearance.Kotich.iOS.Body"
+					android:textStyle="bold" />
+
+				<TextView
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+					android:layout_marginTop="2dp"
+					android:text="Organize favorites into categories and track your reading"
+					android:textAppearance="@style/TextAppearance.Kotich.iOS.Caption" />
+
+			</LinearLayout>
+
+		</LinearLayout>
+
+		<!-- ===== Feature Card 3: Read ===== -->
+		<LinearLayout
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:layout_marginBottom="12dp"
+			android:background="@drawable/bg_ios_feature_card"
+			android:gravity="center_vertical"
+			android:orientation="horizontal"
+			android:padding="16dp">
+
+			<ImageView
+				android:layout_width="48dp"
+				android:layout_height="48dp"
+				android:layout_marginEnd="16dp"
+				android:contentDescription="Read"
+				android:src="@drawable/ic_ios_book"
+				tools:ignore="ContentDescription" />
+
+			<LinearLayout
+				android:layout_width="0dp"
+				android:layout_height="wrap_content"
+				android:layout_weight="1"
+				android:orientation="vertical">
+
+				<TextView
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+					android:fontFamily="sans-serif-medium"
+					android:text="Seamless Reading"
+					android:textAppearance="@style/TextAppearance.Kotich.iOS.Body"
+					android:textStyle="bold" />
+
+				<TextView
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+					android:layout_marginTop="2dp"
+					android:text="Standard and Webtoon reader with gesture support and offline mode"
+					android:textAppearance="@style/TextAppearance.Kotich.iOS.Caption" />
+
+			</LinearLayout>
+
+		</LinearLayout>
+
+		<!-- ===== Feature Card 4: Sync ===== -->
+		<LinearLayout
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:layout_marginBottom="40dp"
+			android:background="@drawable/bg_ios_feature_card"
+			android:gravity="center_vertical"
+			android:orientation="horizontal"
+			android:padding="16dp">
+
+			<ImageView
+				android:layout_width="48dp"
+				android:layout_height="48dp"
+				android:layout_marginEnd="16dp"
+				android:contentDescription="Sync"
+				android:src="@drawable/ic_ios_clock"
+				tools:ignore="ContentDescription" />
+
+			<LinearLayout
+				android:layout_width="0dp"
+				android:layout_height="wrap_content"
+				android:layout_weight="1"
+				android:orientation="vertical">
+
+				<TextView
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+					android:fontFamily="sans-serif-medium"
+					android:text="Stay Updated"
+					android:textAppearance="@style/TextAppearance.Kotich.iOS.Body"
+					android:textStyle="bold" />
+
+				<TextView
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+					android:layout_marginTop="2dp"
+					android:text="Get notified about new chapters and sync across devices"
+					android:textAppearance="@style/TextAppearance.Kotich.iOS.Caption" />
+
+			</LinearLayout>
+
+		</LinearLayout>
+
+		<!-- ===== Get Started Button (iOS pill) ===== -->
+		<Button
+			android:id="@+id/button_get_started"
+			style="@style/Widget.Kotich.iOS.Button"
+			android:layout_width="match_parent"
+			android:layout_height="56dp"
+			android:text="Get Started"
+			android:textSize="17sp" />
+
+		<!-- Skip link -->
+		<TextView
+			android:id="@+id/text_skip"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_marginTop="16dp"
+			android:padding="8dp"
+			android:text="Skip"
+			android:textAppearance="@style/TextAppearance.Kotich.iOS.Caption"
+			android:textColor="@color/ios27_blue" />
+
+	</LinearLayout>
+
+</ScrollView>

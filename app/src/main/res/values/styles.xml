@@ -326,4 +326,126 @@
 		<item name="drawableSize">@dimen/m3_chip_icon_size</item>
 	</style>
 
+	<!-- ==================== iOS 27 Liquid Glass Styles ==================== -->
+
+	<!-- iOS Card -->
+	<style name="Widget.Kotich.iOS.Card" parent="Widget.Material3.CardView.Filled">
+		<item name="cardCornerRadius">16dp</item>
+		<item name="cardElevation">0dp</item>
+		<item name="cardBackgroundColor">@color/ios27_glass_white</item>
+		<item name="strokeColor">@color/ios27_glass_border</item>
+		<item name="strokeWidth">0.5dp</item>
+		<item name="rippleColor">@color/ios27_glass_tint_blue</item>
+	</style>
+
+	<!-- iOS Filled Button (primary action — pill shape) -->
+	<style name="Widget.Kotich.iOS.Button" parent="Widget.Material3.Button">
+		<item name="cornerRadius">12dp</item>
+		<item name="backgroundTint">@color/ios27_blue</item>
+		<item name="android:textColor">@color/ios27_label_on_color</item>
+		<item name="android:textStyle">bold</item>
+		<item name="android:fontFamily">sans-serif-medium</item>
+		<item name="android:minHeight">50dp</item>
+		<item name="android:paddingStart">24dp</item>
+		<item name="android:paddingEnd">24dp</item>
+		<item name="elevation">0dp</item>
+		<item name="android:stateListAnimator">@null</item>
+	</style>
+
+	<!-- iOS Outline Button -->
+	<style name="Widget.Kotich.iOS.Button.Outline" parent="Widget.Material3.Button.OutlinedButton">
+		<item name="cornerRadius">12dp</item>
+		<item name="backgroundTint">@android:color/transparent</item>
+		<item name="android:textColor">@color/ios27_blue</item>
+		<item name="android:textStyle">bold</item>
+		<item name="android:fontFamily">sans-serif-medium</item>
+		<item name="android:minHeight">50dp</item>
+		<item name="android:paddingStart">24dp</item>
+		<item name="android:paddingEnd">24dp</item>
+		<item name="strokeColor">@color/ios27_blue</item>
+		<item name="strokeWidth">1.5dp</item>
+		<item name="rippleColor">@color/ios27_glass_tint_blue</item>
+	</style>
+
+	<!-- iOS Search Bar -->
+	<style name="Widget.Kotich.iOS.SearchBar" parent="Widget.Material3.SearchBar">
+		<item name="cornerRadius">12dp</item>
+		<item name="backgroundTint">@color/ios27_glass_fill_secondary</item>
+		<item name="elevation">0dp</item>
+		<item name="android:paddingStart">12dp</item>
+		<item name="android:paddingEnd">12dp</item>
+	</style>
+
+	<!-- iOS Bottom Sheet -->
+	<style name="Widget.Kotich.iOS.BottomSheet" parent="Widget.Material3.BottomSheet.Modal">
+		<item name="shapeAppearanceOverlay">@style/ShapeAppearanceOverlay.Kotich.iOS.BottomSheet</item>
+		<item name="backgroundTint">@color/ios27_glass_white_ultra</item>
+	</style>
+
+	<style name="ShapeAppearanceOverlay.Kotich.iOS.BottomSheet" parent="">
+		<item name="cornerSizeTopLeft">20dp</item>
+		<item name="cornerSizeTopRight">20dp</item>
+		<item name="cornerFamilyTopLeft">rounded</item>
+		<item name="cornerFamilyTopRight">rounded</item>
+	</style>
+
+	<!-- iOS Chip / Tag -->
+	<style name="Widget.Kotich.iOS.Chip" parent="Widget.Material3.Chip.Suggestion">
+		<item name="chipCornerRadius">8dp</item>
+		<item name="chipBackgroundColor">@color/ios27_glass_tint_blue</item>
+		<item name="android:textColor">@color/ios27_blue</item>
+		<item name="chipMinHeight">32dp</item>
+		<item name="android:textSize">13sp</item>
+		<item name="android:fontFamily">sans-serif-medium</item>
+		<item name="chipStrokeColor">@color/ios27_glass_border</item>
+		<item name="chipStrokeWidth">0.5dp</item>
+	</style>
+
+	<!-- iOS Text Appearances -->
+	<style name="TextAppearance.Kotich.iOS.Title" parent="TextAppearance.Material3.TitleLarge">
+		<item name="android:fontFamily">sans-serif-light</item>
+		<item name="android:textSize">28sp</item>
+		<item name="android:textColor">@color/ios27_label</item>
+		<item name="android:letterSpacing">0.01</item>
+	</style>
+
+	<style name="TextAppearance.Kotich.iOS.Headline" parent="TextAppearance.Material3.HeadlineSmall">
+		<item name="android:fontFamily">sans-serif</item>
+		<item name="android:textStyle">bold</item>
+		<item name="android:textSize">20sp</item>
+		<item name="android:textColor">@color/ios27_label</item>
+	</style>
+
+	<style name="TextAppearance.Kotich.iOS.Body" parent="TextAppearance.Material3.BodyLarge">
+		<item name="android:fontFamily">sans-serif</item>
+		<item name="android:textSize">16sp</item>
+		<item name="android:textColor">@color/ios27_label</item>
+		<item name="android:lineSpacingMultiplier">1.25</item>
+	</style>
+
+	<style name="TextAppearance.Kotich.iOS.Caption" parent="TextAppearance.Material3.BodySmall">
+		<item name="android:fontFamily">sans-serif</item>
+		<item name="android:textSize">13sp</item>
+		<item name="android:textColor">@color/ios27_label_secondary</item>
+	</style>
+
+	<!-- iOS Navigation Bar / Toolbar -->
+	<style name="Widget.Kotich.iOS.Toolbar" parent="Widget.Material3.Toolbar">
+		<item name="titleTextAppearance">@style/TextAppearance.Kotich.iOS.Headline</item>
+		<item name="titleTextColor">@color/ios27_label</item>
+		<item name="navigationIconTint">@color/ios27_blue</item>
+		<item name="android:background">@android:color/transparent</item>
+		<item name="contentInsetStart">16dp</item>
+		<item name="contentInsetEnd">16dp</item>
+	</style>
+
+	<!-- iOS Drag Handle for Bottom Sheets -->
+	<style name="Widget.Kotich.iOS.DragHandle" parent="Widget.Material3.BottomSheet.DragHandle">
+		<item name="android:background">@drawable/bg_ios_drag_handle</item>
+		<item name="android:minWidth">36dp</item>
+		<item name="android:minHeight">5dp</item>
+		<item name="android:paddingTop">8dp</item>
+		<item name="android:paddingBottom">12dp</item>
+	</style>
+
 </resources>

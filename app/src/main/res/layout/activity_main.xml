@@ -1,10 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!--
+  iOS 27 "Liquid Glass" redesigned main activity layout.
+  Features: Large title navigation bar, frosted glass search bar, clean tab bar.
+  Preserves all existing IDs for compatibility with MainActivity.kt.
+-->
 <androidx.coordinatorlayout.widget.CoordinatorLayout
 	xmlns:android="http://schemas.android.com/apk/res/android"
 	xmlns:app="http://schemas.android.com/apk/res-auto"
 	xmlns:tools="http://schemas.android.com/tools"
 	android:layout_width="match_parent"
 	android:layout_height="match_parent"
+	android:background="@color/ios27_background"
 	tools:context=".main.ui.MainActivity">
 
 	<androidx.fragment.app.FragmentContainerView
@@ -18,7 +24,7 @@
 		android:id="@+id/appbar"
 		android:layout_width="match_parent"
 		android:layout_height="wrap_content"
-		android:background="@null"
+		android:background="@android:color/transparent"
 		android:clipToPadding="false"
 		android:elevation="0dp"
 		android:fitsSystemWindows="false"
@@ -35,13 +41,41 @@
 			android:fitsSystemWindows="true"
 			app:layout_scrollFlags="scroll|enterAlways|snap" />
 
+		<!-- iOS-style large title area -->
+		<LinearLayout
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:orientation="vertical"
+			android:paddingStart="@dimen/ios_padding_horizontal"
+			android:paddingEnd="@dimen/ios_padding_horizontal"
+			android:paddingTop="8dp"
+			android:paddingBottom="4dp"
+			app:layout_scrollFlags="scroll|enterAlways|snap">
+
+			<TextView
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:text="@string/app_name"
+				android:textAppearance="@style/TextAppearance.Kotich.iOS.Title"
+				android:textSize="@dimen/ios_large_title_size"
+				android:fontFamily="sans-serif-bold" />
+
+		</LinearLayout>
+
+		<!-- iOS-style frosted glass search bar -->
 		<com.google.android.material.search.SearchBar
 			android:id="@+id/search_bar"
 			android:layout_width="match_parent"
 			android:layout_height="wrap_content"
+			android:layout_marginStart="@dimen/ios_padding_horizontal"
+			android:layout_marginEnd="@dimen/ios_padding_horizontal"
+			android:layout_marginBottom="8dp"
 			android:hint="@string/search_manga"
 			app:forceDefaultNavigationOnClickListener="true"
-			app:layout_scrollFlags="scroll|enterAlways|snap" />
+			app:layout_scrollFlags="scroll|enterAlways|snap"
+			app:backgroundTint="@color/ios27_glass_fill_secondary"
+			app:cornerRadius="@dimen/ios_corner_radius_search"
+			app:elevation="0dp" />
 
 	</com.google.android.material.appbar.AppBarLayout>
 
@@ -63,6 +97,7 @@
 
 	</com.google.android.material.search.SearchView>
 
+	<!-- iOS-style Continue Reading button — pill-shaped, blue filled -->
 	<com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
 		android:id="@+id/fab"
 		android:layout_width="wrap_content"
@@ -70,7 +105,11 @@
 		android:layout_marginHorizontal="16dp"
 		android:text="@string/_continue"
 		android:visibility="gone"
+		android:textStyle="bold"
+		android:fontFamily="sans-serif-medium"
 		app:icon="@drawable/ic_read"
+		app:backgroundTint="@color/ios27_blue"
+		app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.Kotatsu.Circle"
 		app:layout_anchor="@id/bottomNav"
 		app:layout_anchorGravity="top|end"
 		app:layout_behavior="com.kotich.app.main.ui.MainActionButtonBehavior"
@@ -79,11 +118,17 @@
 		tools:ignore="InconsistentLayout"
 		tools:visibility="visible" />
 
+	<!-- iOS-style tab bar -->
 	<com.kotich.app.core.ui.widgets.SlidingBottomNavigationView
 		android:id="@+id/bottomNav"
 		android:layout_width="match_parent"
 		android:layout_height="wrap_content"
 		android:layout_gravity="bottom"
-		android:fitsSystemWindows="false" />
+		android:background="@drawable/bg_glass_tab_bar"
+		android:elevation="8dp"
+		android:fitsSystemWindows="false"
+		app:itemIconTint="@color/bottom_menu_active_item"
+		app:itemTextColor="@color/bottom_menu_active_item"
+		app:labelVisibilityMode="labeled" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

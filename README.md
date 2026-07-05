@@ -1,18 +1,51 @@
-> [!IMPORTANT]
-> In light of recent challenges — including threating actions from Kakao Entertainment Corp and upcoming Google’s
-> [new sideloading policy](https://f-droid.org/ru/2025/10/28/sideloading.html) — we’ve made the difficult decision to shut down Kotatsu and end its support. We’re deeply grateful
-> to everyone who contributed and to the amazing community that grew around this project.
+<div align="center">
+
+# Kotich
+
+**A beautiful manga reader for Android with an iOS 27 "Liquid Glass" design language.**
+
+Forked from [Kotatsu](https://github.com/KotatsuApp/Kotatsu) — redesigned from the ground up with Apple's Liquid Glass aesthetic.
+
+![Android 6.0](https://img.shields.io/badge/android-6.0+-brightgreen) [![License](https://img.shields.io/github/license/KotatsuApp/Kotatsu)](https://github.com/KotatsuApp/Kotatsu/blob/devel/LICENSE)
+
+</div>
 
 ---
 
-<div align="center">
+## About
 
-**[Kotatsu](https://github.com/KotatsuApp/Kotatsu) is a free and open-source manga reader for Android with built-in
-online content sources.**
+Kotich is a free and open-source manga reader for Android that brings the **iOS 27 Liquid Glass** design philosophy to the manga reading experience. Built on top of the powerful Kotatsu engine with 1200+ manga sources, Kotich reimagines every screen with frosted glass surfaces, vibrant system colors, and the clean, breathable layouts inspired by Apple's latest design language.
 
-![Android 6.0](https://img.shields.io/badge/android-6.0+-brightgreen) [![Sources count](https://img.shields.io/badge/dynamic/yaml?url=https%3A%2F%2Fraw.githubusercontent.com%2FKotatsuApp%2Fkotatsu-parsers%2Frefs%2Fheads%2Fmaster%2F.github%2Fsummary.yaml&query=total&label=manga%20sources&color=%23E9321C)](https://github.com/KotatsuApp/kotatsu-parsers) [![weblate](https://hosted.weblate.org/widgets/kotatsu/-/strings/svg-badge.svg)](https://hosted.weblate.org/engage/kotatsu/) [![Discord](https://img.shields.io/discord/898363402467045416?color=5865f2&label=discord)](https://discord.gg/NNJ5RgVBC5) [![Telegram](https://img.shields.io/badge/chat-telegram-60ACFF?)](https://t.me/kotatsuapp) [![License](https://img.shields.io/github/license/KotatsuApp/Kotatsu)](https://github.com/KotatsuApp/Kotatsu/blob/devel/LICENSE)
+## Design Philosophy — iOS 27 "Liquid Glass"
 
-### Main Features
+Kotich implements a genuine **Liquid Glass** design system inspired by Apple's iOS 26/27 aesthetic:
+
+- **Frosted Glass Surfaces** — Translucent cards and sheets with subtle blue tint refraction
+- **Vibrant System Colors** — iOS Blue (#007AFF), Green (#34C759), Purple (#AF52DE), and more
+- **Clean Backgrounds** — Classic iOS light gray (#F2F2F7) / true black dark mode (#000000)
+- **SF Pro Typography** — System sans-serif with light/regular/medium/bold weight hierarchy
+- **16dp Corner Radius** — iOS-standard rounded cards, 12dp buttons, 20dp sheets
+- **Subtle Shadows** — Soft elevation instead of Material elevation
+- **Large Title Navigation** — iOS-style collapsible large titles
+- **Bottom Sheets with Drag Handles** — iOS-pattern modal sheets
+- **Pill-shaped Buttons** — Rounded action buttons following iOS conventions
+- **Generous Whitespace** — Breathing room between elements for a premium feel
+
+### Design Files
+
+The Liquid Glass design system is defined across several resource files:
+
+| File | Purpose |
+|------|---------|
+| `colors_ios27.xml` | Complete iOS 27 color palette (system colors, glass tints, surfaces) |
+| `themes.xml` → `Theme.Kotich.iOS27` | Full Material 3 theme mapped to iOS colors |
+| `styles.xml` → `Widget.Kotich.iOS.*` | iOS-style widgets (cards, buttons, chips, search bar, sheets) |
+| `drawable/bg_glass_card.xml` | Frosted glass card backgrounds |
+| `drawable/bg_ios_button.xml` | iOS pill button backgrounds |
+| `drawable/bg_ios_bottom_sheet.xml` | iOS bottom sheet with rounded top corners |
+| `drawable/ic_ios_*.xml` | SF Symbols-style vector icons |
+
+## Main Features
 
 <div align="left">
 
@@ -21,7 +54,7 @@ online content sources.**
 * Favorites organized by user-defined categories
 * Reading history, bookmarks and incognito mode support
 * Download manga and read it offline. Third-party CBZ archives are also supported
-* Clean and convenient Material You UI, optimized for phones, tablets and desktop
+* **iOS 27 Liquid Glass UI** — frosted glass cards, vibrant colors, generous spacing
 * Standard and Webtoon-optimized customizable reader, gesture support on reading interface
 * Notifications about new chapters with updates feed, manga recommendations (with filters)
 * Integration with manga tracking services: Shikimori, AniList, MyAnimeList, Kitsu
@@ -55,31 +88,13 @@ online content sources.**
 <img src="https://hosted.weblate.org/widget/kotatsu/horizontal-auto.png" alt="Translation status" />
 </a>
 
-**[Kotatsu](https://github.com/KotatsuApp/Kotatsu) is localized in a number of different languages.**<br>
+**Kotich is localized in a number of different languages.**<br>
 **📌 If you would like to help improve these or add new languages,
 please head over to the [Weblate project page](https://hosted.weblate.org/engage/kotatsu/)**
 
 ### Contributing
 
-<br>
-
-<a href="https://github.com/KotatsuApp/Kotatsu">
-  <picture>
-    <source srcset="https://github-readme-stats.vercel.app/api/pin/?username=KotatsuApp&repo=Kotatsu&bg_color=0d1117&text_color=1976d2&title_color=1976d2&icon_color=0877d2&border_radius=10&description_lines_count=2&show_owner=true" media="(prefers-color-scheme: dark)">
-    <img src="https://github-readme-stats.vercel.app/api/pin/?username=KotatsuApp&repo=Kotatsu&text_color=1976d2&title_color=1976d2&icon_color=0877d2&border_radius=10&description_lines_count=2&show_owner=true" alt="Kotatsu GitHub Repository">
-  </picture>
-</a>
-<a href="https://github.com/KotatsuApp/Kotatsu-parsers">
-  <picture>
-    <source srcset="https://github-readme-stats.vercel.app/api/pin/?username=KotatsuApp&repo=Kotatsu-parsers&bg_color=0d1117&text_color=1976d2&title_color=1976d2&icon_color=0877d2&border_radius=10&description_lines_count=2&show_owner=true" media="(prefers-color-scheme: dark)">
-    <img src="https://github-readme-stats.vercel.app/api/pin/?username=KotatsuApp&repo=Kotatsu-parsers&text_color=1976d2&title_color=1976d2&icon_color=0877d2&border_radius=10&description_lines_count=2&show_owner=true" alt="Kotatsu-parsers GitHub Repository">
-  </picture>
-</a><br></br>
-
-</br>
-
-**📌 Pull requests are welcome, if you want:
-See [CONTRIBUTING.md](https://github.com/KotatsuApp/Kotatsu/blob/devel/CONTRIBUTING.md) for the guidelines**
+Pull requests are welcome. See [CONTRIBUTING.md](https://github.com/KotatsuApp/Kotatsu/blob/devel/CONTRIBUTING.md) for guidelines.
 
 ### Certificate fingerprints
 

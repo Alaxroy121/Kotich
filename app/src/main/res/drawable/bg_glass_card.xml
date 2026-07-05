@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- iOS 27 Liquid Glass card background — frosted translucent effect -->
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+	<!-- Base frosted layer -->
+	<item>
+		<shape android:shape="rectangle">
+			<solid android:color="@color/ios27_glass_white" />
+			<corners android:radius="16dp" />
+		</shape>
+	</item>
+	<!-- Subtle blue tint overlay for glass refraction -->
+	<item>
+		<shape android:shape="rectangle">
+			<solid android:color="@color/ios27_glass_tint_blue" />
+			<corners android:radius="16dp" />
+		</shape>
+	</item>
+	<!-- Glass border -->
+	<item>
+		<shape android:shape="rectangle">
+			<stroke
+				android:width="0.5dp"
+				android:color="@color/ios27_glass_border" />
+			<corners android:radius="16dp" />
+		</shape>
+	</item>
+</layer-list>

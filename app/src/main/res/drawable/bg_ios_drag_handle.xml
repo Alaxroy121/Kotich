@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- iOS 27 drag handle indicator for bottom sheets -->
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+	android:shape="rectangle">
+	<solid android:color="@color/ios27_separator_opaque" />
+	<corners android:radius="2.5dp" />
+	<size
+		android:width="36dp"
+		android:height="5dp" />
+</shape>

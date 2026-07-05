@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- iOS 27 feature card for onboarding — glass effect with blue accent -->
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+	<item>
+		<shape android:shape="rectangle">
+			<solid android:color="@color/ios27_glass_white_light" />
+			<corners android:radius="16dp" />
+		</shape>
+	</item>
+	<item>
+		<shape android:shape="rectangle">
+			<solid android:color="@color/ios27_glass_tint_blue" />
+			<corners android:radius="16dp" />
+		</shape>
+	</item>
+	<item>
+		<shape android:shape="rectangle">
+			<stroke
+				android:width="0.5dp"
+				android:color="@color/ios27_glass_border" />
+			<corners android:radius="16dp" />
+		</shape>
+	</item>
+</layer-list>

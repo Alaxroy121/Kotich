@@ -76,6 +76,59 @@
 		<item name="coverImageViewStyle">@style/Widget.Kotatsu.ImageView.Cover</item>
 	</style>
 
+	<!--== iOS 27 "Liquid Glass" Theme ==-->
+	<style name="Theme.Kotich.iOS27" parent="Base.Theme.Kotatsu">
+		<!-- Override primary colors with iOS blue -->
+		<item name="colorPrimary">@color/ios27_primary</item>
+		<item name="colorPrimaryContainer">@color/ios27_primaryContainer</item>
+		<item name="colorOnPrimary">@color/ios27_onPrimary</item>
+		<item name="colorOnPrimaryContainer">@color/ios27_onPrimaryContainer</item>
+		<item name="colorPrimaryInverse">@color/ios27_inversePrimary</item>
+		<item name="colorSecondary">@color/ios27_secondary</item>
+		<item name="colorSecondaryContainer">@color/ios27_secondaryContainer</item>
+		<item name="colorOnSecondary">@color/ios27_onSecondary</item>
+		<item name="colorOnSecondaryContainer">@color/ios27_onSecondaryContainer</item>
+		<item name="colorTertiary">@color/ios27_tertiary</item>
+		<item name="colorTertiaryContainer">@color/ios27_tertiaryContainer</item>
+		<item name="colorOnTertiary">@color/ios27_onTertiary</item>
+		<item name="colorOnTertiaryContainer">@color/ios27_onTertiaryContainer</item>
+		<item name="colorSurface">@color/ios27_surface</item>
+		<item name="colorSurfaceDim">@color/ios27_surface_dim</item>
+		<item name="colorSurfaceBright">@color/ios27_surface_bright</item>
+		<item name="colorSurfaceContainerLowest">@color/ios27_surface_container_lowest</item>
+		<item name="colorSurfaceContainerLow">@color/ios27_surface_container_low</item>
+		<item name="colorSurfaceContainer">@color/ios27_surface_container</item>
+		<item name="colorSurfaceContainerHigh">@color/ios27_surface_container_high</item>
+		<item name="colorSurfaceContainerHighest">@color/ios27_surface_container_highest</item>
+		<item name="colorSurfaceVariant">@color/ios27_surface_variant</item>
+		<item name="colorOnSurface">@color/ios27_on_surface</item>
+		<item name="colorOnSurfaceVariant">@color/ios27_on_surface_variant</item>
+		<item name="colorSurfaceInverse">@color/ios27_inverse_surface</item>
+		<item name="colorOnSurfaceInverse">@color/ios27_inverse_on_surface</item>
+		<item name="colorOnBackground">@color/ios27_on_background</item>
+		<item name="colorError">@color/ios27_error</item>
+		<item name="colorErrorContainer">@color/ios27_error_container</item>
+		<item name="colorOnError">@color/ios27_on_error</item>
+		<item name="colorOnErrorContainer">@color/ios27_on_error_container</item>
+		<item name="colorOutline">@color/ios27_outline</item>
+		<item name="colorOutlineVariant">@color/ios27_outline_variant</item>
+
+		<!-- iOS-style system bars -->
+		<item name="android:statusBarColor">@android:color/transparent</item>
+		<item name="android:navigationBarColor">@color/ios27_glass_white</item>
+
+		<!-- iOS-style component overrides -->
+		<item name="bottomSheetDialogTheme">@style/ThemeOverlay.Kotich.iOS27.BottomSheetDialog</item>
+		<item name="bottomSheetDragHandleStyle">@style/Widget.Kotich.iOS.DragHandle</item>
+		<item name="materialSearchBarStyle">@style/Widget.Kotich.iOS.SearchBar</item>
+	</style>
+
+	<!-- iOS 27 Bottom Sheet Dialog -->
+	<style name="ThemeOverlay.Kotich.iOS27.BottomSheetDialog" parent="ThemeOverlay.Material3.BottomSheetDialog">
+		<item name="bottomSheetStyle">@style/Widget.Kotich.iOS.BottomSheet</item>
+		<item name="android:windowIsFloating">false</item>
+	</style>
+
 	<!--== Default Theme ==-->
 	<style name="Theme.Kotatsu" parent="Base.Theme.Kotatsu" />
 

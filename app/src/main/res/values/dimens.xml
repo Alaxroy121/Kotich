@@ -82,4 +82,23 @@
 
 	<dimen name="chip_icon_corner">3dp</dimen>
 	<dimen name="read_button_min_width">92dp</dimen>
+
+	<!-- iOS 27 Liquid Glass Dimensions -->
+	<dimen name="ios_corner_radius_card">16dp</dimen>
+	<dimen name="ios_corner_radius_button">12dp</dimen>
+	<dimen name="ios_corner_radius_sheet">20dp</dimen>
+	<dimen name="ios_corner_radius_chip">8dp</dimen>
+	<dimen name="ios_corner_radius_search">12dp</dimen>
+	<dimen name="ios_corner_radius_image">14dp</dimen>
+	<dimen name="ios_card_elevation">0dp</dimen>
+	<dimen name="ios_shadow_radius">8dp</dimen>
+	<dimen name="ios_padding_horizontal">16dp</dimen>
+	<dimen name="ios_padding_vertical">12dp</dimen>
+	<dimen name="ios_sheet_peek_height">400dp</dimen>
+	<dimen name="ios_hero_height">320dp</dimen>
+	<dimen name="ios_large_title_size">34sp</dimen>
+	<dimen name="ios_nav_bar_height">56dp</dimen>
+	<dimen name="ios_tab_bar_height">83dp</dimen>
+	<dimen name="ios_drag_handle_width">36dp</dimen>
+	<dimen name="ios_drag_handle_height">5dp</dimen>
 </resources>

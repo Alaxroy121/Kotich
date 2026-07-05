@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- iOS 27 gradient overlay for hero images — bottom to transparent -->
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+	android:shape="rectangle">
+	<gradient
+		android:angle="270"
+		android:endColor="@android:color/transparent"
+		android:startColor="#CC000000"
+		android:type="linear" />
+</shape>

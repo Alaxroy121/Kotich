@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ iOS 27 "Liquid Glass" Color Palette
+  ~ Inspired by Apple's Human Interface Guidelines
+  ~ Vibrant system colors with frosted glass translucency hints
+-->
+<resources>
+
+	<!-- ==================== iOS 27 Primary System Colors ==================== -->
+	<color name="ios27_blue">#007AFF</color>
+	<color name="ios27_blue_light">#5AC8FA</color>
+	<color name="ios27_blue_dark">#0051D5</color>
+	<color name="ios27_blue_vibrant">#0A84FF</color>
+
+	<color name="ios27_green">#34C759</color>
+	<color name="ios27_green_light">#30D158</color>
+
+	<color name="ios27_orange">#FF9500</color>
+	<color name="ios27_orange_light">#FF9F0A</color>
+
+	<color name="ios27_red">#FF3B30</color>
+	<color name="ios27_red_light">#FF453A</color>
+
+	<color name="ios27_purple">#AF52DE</color>
+	<color name="ios27_purple_light">#BF5AF2</color>
+
+	<color name="ios27_pink">#FF2D55</color>
+	<color name="ios27_pink_light">#FF375F</color>
+
+	<color name="ios27_indigo">#5856D6</color>
+	<color name="ios27_indigo_light">#5E5CE6</color>
+
+	<color name="ios27_teal">#5AC8FA</color>
+	<color name="ios27_cyan">#64D2FF</color>
+
+	<color name="ios27_yellow">#FFCC00</color>
+	<color name="ios27_yellow_light">#FFD60A</color>
+
+	<!-- ==================== Light Mode Backgrounds ==================== -->
+	<color name="ios27_background">#F2F2F7</color>
+	<color name="ios27_background_elevated">#FFFFFF</color>
+	<color name="ios27_background_grouped">#F2F2F7</color>
+	<color name="ios27_background_secondary">#F2F2F7</color>
+	<color name="ios27_background_tertiary">#FFFFFF</color>
+
+	<!-- ==================== Dark Mode Backgrounds ==================== -->
+	<color name="ios27_dark_background">#000000</color>
+	<color name="ios27_dark_background_elevated">#1C1C1E</color>
+	<color name="ios27_dark_background_secondary">#1C1C1E</color>
+	<color name="ios27_dark_background_tertiary">#2C2C2E</color>
+
+	<!-- ==================== Glass Effect Colors ==================== -->
+	<color name="ios27_glass_white">#CCFFFFFF</color>
+	<color name="ios27_glass_white_light">#99FFFFFF</color>
+	<color name="ios27_glass_white_ultra">#B3FFFFFF</color>
+	<color name="ios27_glass_black">#99000000</color>
+	<color name="ios27_glass_black_light">#4D000000</color>
+	<color name="ios27_glass_tint_blue">#1A007AFF</color>
+	<color name="ios27_glass_tint_blue_strong">#33007AFF</color>
+	<color name="ios27_glass_border">#33FFFFFF</color>
+	<color name="ios27_glass_border_dark">#1AFFFFFF</color>
+	<color name="ios27_glass_fill_secondary">#66E5E5EA</color>
+
+	<!-- ==================== Surface Colors ==================== -->
+	<color name="ios27_surface">#FFFFFF</color>
+	<color name="ios27_surface_secondary">#F2F2F7</color>
+	<color name="ios27_surface_elevated">#FFFFFF</color>
+	<color name="ios27_surface_glass">#F0F0F5</color>
+
+	<color name="ios27_dark_surface">#1C1C1E</color>
+	<color name="ios27_dark_surface_secondary">#2C2C2E</color>
+	<color name="ios27_dark_surface_elevated">#2C2C2E</color>
+	<color name="ios27_dark_surface_glass">#1C1C1E</color>
+
+	<!-- ==================== Text Colors ==================== -->
+	<color name="ios27_label">#000000</color>
+	<color name="ios27_label_secondary">#3C3C43</color>
+	<color name="ios27_label_tertiary">#3C3C4399</color>
+	<color name="ios27_label_quaternary">#3C3C434D</color>
+	<color name="ios27_label_on_color">#FFFFFF</color>
+
+	<color name="ios27_dark_label">#FFFFFF</color>
+	<color name="ios27_dark_label_secondary">#EBEBF599</color>
+	<color name="ios27_dark_label_tertiary">#EBEBF54D</color>
+	<color name="ios27_dark_label_quaternary">#EBEBF52E</color>
+
+	<!-- ==================== Separator Colors ==================== -->
+	<color name="ios27_separator">#3C3C4333</color>
+	<color name="ios27_separator_opaque">#C6C6C8</color>
+	<color name="ios27_separator_fill">#787880</color>
+
+	<!-- ==================== Material 3 Mapping Colors ==================== -->
+	<!-- These map iOS 27 colors to Material 3 theme attributes for the Liquid scheme -->
+
+	<color name="ios27_primary">#007AFF</color>
+	<color name="ios27_onPrimary">#FFFFFF</color>
+	<color name="ios27_primaryContainer">#D0E8FF</color>
+	<color name="ios27_onPrimaryContainer">#001C3A</color>
+	<color name="ios27_inversePrimary">#A8C8FF</color>
+
+	<color name="ios27_secondary">#5856D6</color>
+	<color name="ios27_onSecondary">#FFFFFF</color>
+	<color name="ios27_secondaryContainer">#E8E0FF</color>
+	<color name="ios27_onSecondaryContainer">#1D1A4A</color>
+
+	<color name="ios27_tertiary">#AF52DE</color>
+	<color name="ios27_onTertiary">#FFFFFF</color>
+	<color name="ios27_tertiaryContainer">#F5DEFF</color>
+	<color name="ios27_onTertiaryContainer">#380058</color>
+
+	<color name="ios27_surface_dim">#D2D2D7</color>
+	<color name="ios27_surface_bright">#FFFFFF</color>
+	<color name="ios27_surface_container_lowest">#FFFFFF</color>
+	<color name="ios27_surface_container_low">#F8F8FD</color>
+	<color name="ios27_surface_container">#F2F2F7</color>
+	<color name="ios27_surface_container_high">#ECECF1</color>
+	<color name="ios27_surface_container_highest">#E5E5EA</color>
+	<color name="ios27_surface_variant">#E5E5EA</color>
+	<color name="ios27_on_surface">#1C1C1E</color>
+	<color name="ios27_on_surface_variant">#3A3A3C</color>
+	<color name="ios27_inverse_surface">#2C2C2E</color>
+	<color name="ios27_inverse_on_surface">#F2F2F7</color>
+	<color name="ios27_on_background">#1C1C1E</color>
+
+	<color name="ios27_error">#FF3B30</color>
+	<color name="ios27_on_error">#FFFFFF</color>
+	<color name="ios27_error_container">#FFDAD4</color>
+	<color name="ios27_on_error_container">#410001</color>
+
+	<color name="ios27_outline">#8E8E93</color>
+	<color name="ios27_outline_variant">#C6C6C8</color>
+
+	<!-- ==================== iOS Tab Bar / Navigation ==================== -->
+	<color name="ios27_tab_bar_background">#F9F9FB</color>
+	<color name="ios27_tab_bar_tint">#007AFF</color>
+	<color name="ios27_tab_bar_unselected">#8E8E93</color>
+	<color name="ios27_tab_bar_border">#33C6C6C8</color>
+
+	<!-- ==================== iOS Shadows ==================== -->
+	<color name="ios27_shadow">#1A000000</color>
+	<color name="ios27_shadow_strong">#33000000</color>
+	<color name="ios27_shadow_light">#0D000000</color>
+
+</resources>
