@@ -84,7 +84,7 @@ class SlidingBottomNavigationView @JvmOverloads constructor(
 		// Detect iOS 27 Liquid theme by checking for the tint blue color attribute
 		try {
 			val typedValue = android.util.TypedValue()
-			context.theme.resolveAttribute(R.attr.colorPrimary, typedValue, true)
+			context.theme.resolveAttribute(android.R.attr.colorPrimary, typedValue, true)
 			// If the theme has ios27 resources, the glass fill color should be available
 			val glassFill = ContextCompat.getColor(context, R.color.ios27_glass_fill_secondary)
 			if (glassFill != 0) {

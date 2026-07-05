@@ -4,20 +4,22 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.WindowInsetsCompat
 import androidx.core.view.isVisible
 import androidx.lifecycle.lifecycleScope
+import androidx.recyclerview.widget.DiffUtil
+import androidx.recyclerview.widget.ListAdapter
+import androidx.recyclerview.widget.RecyclerView
 import com.hannesdorfmann.adapterdelegates4.dsl.adapterDelegateViewBinding
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import com.kotich.app.core.parser.MangaRepository
-import com.kotich.app.core.ui.BaseListAdapter
 import com.kotich.app.core.ui.sheet.BaseAdaptiveSheet
 import com.kotich.app.databinding.ItemChapterPreviewPageBinding
 import com.kotich.app.databinding.SheetChapterPreviewBinding
 import com.kotich.app.details.ui.pager.ChaptersPagesViewModel
-import com.kotich.app.list.ui.model.ListModel
 import org.koitharu.kotatsu.parsers.model.MangaPage
 import javax.inject.Inject
 
@@ -44,6 +46,8 @@ class ChapterPreviewSheet : BaseAdaptiveSheet<SheetChapterPreviewBinding>() {
 		container: ViewGroup?,
 	) = SheetChapterPreviewBinding.inflate(inflater, container, false)
 
+	override fun onApplyWindowInsets(v: View, insets: WindowInsetsCompat): WindowInsetsCompat = insets
+
 	override fun onViewBindingCreated(binding: SheetChapterPreviewBinding, savedInstanceState: Bundle?) {
 		super.onViewBindingCreated(binding, savedInstanceState)
 
@@ -68,8 +72,7 @@ class ChapterPreviewSheet : BaseAdaptiveSheet<SheetChapterPreviewBinding>() {
 
 		binding.textViewChapterTitle.text = chapter.title ?: "Chapter ${chapter.number.toInt()}"
 
-		val adapter = BaseListAdapter<PreviewPageItem>()
-			.addDelegate(previewPageDelegate())
+		val adapter = PreviewPageAdapter()
 		binding.recyclerViewPreview.adapter = adapter
 
 		// Load preview in lifecycle scope
@@ -99,9 +102,9 @@ class ChapterPreviewSheet : BaseAdaptiveSheet<SheetChapterPreviewBinding>() {
 				binding.textViewChapterInfo.text = "$total pages • showing $count previews"
 				binding.recyclerViewPreview.isVisible = true
 
-				adapter.items = sampled.mapIndexed { index, page ->
+				adapter.submitList(sampled.mapIndexed { index, page ->
 					PreviewPageItem(page, pageNumber = (index * 2) + 1)
-				}
+				})
 			} catch (e: Exception) {
 				binding.progressBar.isVisible = false
 				binding.textViewError.isVisible = true
@@ -110,15 +113,6 @@ class ChapterPreviewSheet : BaseAdaptiveSheet<SheetChapterPreviewBinding>() {
 		}
 
 		binding.buttonClose.setOnClickListener { dismiss() }
-	}
-
-	private fun previewPageDelegate() = adapterDelegateViewBinding<PreviewPageItem, ListModel, ItemChapterPreviewPageBinding>(
-		{ inflater, parent -> ItemChapterPreviewPageBinding.inflate(inflater, parent, false) },
-	) {
-		bind {
-			binding.imageViewPreview.setImageAsync(item.page)
-			binding.textViewPageNumber.text = "Page ${item.pageNumber}"
-		}
 	}
 
 	companion object {
@@ -139,8 +133,33 @@ class ChapterPreviewSheet : BaseAdaptiveSheet<SheetChapterPreviewBinding>() {
 private data class PreviewPageItem(
 	val page: MangaPage,
 	val pageNumber: Int,
-) : ListModel {
-	override fun areItemsTheSame(other: ListModel): Boolean {
-		return other is PreviewPageItem && page.id == other.page.id
+)
+
+private class PreviewPageAdapter : ListAdapter<PreviewPageItem, PreviewPageAdapter.ViewHolder>(
+	object : DiffUtil.ItemCallback<PreviewPageItem>() {
+		override fun areItemsTheSame(old: PreviewPageItem, new: PreviewPageItem) = old.page.id == new.page.id
+		override fun areContentsTheSame(old: PreviewPageItem, new: PreviewPageItem) = old == new
+	},
+) {
+
+	override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
+		val binding = ItemChapterPreviewPageBinding.inflate(
+			LayoutInflater.from(parent.context), parent, false,
+		)
+		return ViewHolder(binding)
+	}
+
+	override fun onBindViewHolder(holder: ViewHolder, position: Int) {
+		holder.bind(getItem(position))
+	}
+
+	class ViewHolder(
+		private val binding: ItemChapterPreviewPageBinding,
+	) : RecyclerView.ViewHolder(binding.root) {
+
+		fun bind(item: PreviewPageItem) {
+			binding.imageViewPreview.setImageAsync(item.page)
+			binding.textViewPageNumber.text = "Page ${item.pageNumber}"
+		}
 	}
 }
