@@ -105,6 +105,8 @@ class CloudFlareActivity : BaseBrowserActivity(), CloudFlareCallback {
 	override fun onCheckPassed() {
 		pendingResult = RESULT_OK
 		lifecycleScope.launch {
+			// Flush cookies to persistent storage so cf_clearance survives app restart
+			android.webkit.CookieManager.getInstance().flush()
 			val source = intent?.getStringExtra(AppRouter.KEY_SOURCE)
 			if (source != null) {
 				runCatchingCancellable {
@@ -129,15 +131,12 @@ class CloudFlareActivity : BaseBrowserActivity(), CloudFlareCallback {
 			cfClient.reset()
 			val targetUrl = intent?.dataString?.toHttpUrlOrNull()
 			if (targetUrl != null) {
-				clearCfCookies(targetUrl)
+				// DON'T clear CF cookies — let the WebView reuse existing clearance.
+				// Only clear if the cookie is actually expired (handled by CookieJar).
+				// Flush WebView cookies to persistent storage so they survive app restart.
+				android.webkit.CookieManager.getInstance().flush()
 				viewBinding.webView.loadUrl(targetUrl.toString())
 			}
-		}
-	}
-
-	private suspend fun clearCfCookies(url: HttpUrl) = runInterruptible(Dispatchers.Default) {
-		cookieJar.removeCookies(url) { cookie ->
-			CloudFlareHelper.isCloudFlareCookie(cookie.name)
 		}
 	}
 

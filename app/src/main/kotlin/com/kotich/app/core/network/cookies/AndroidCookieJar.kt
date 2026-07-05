@@ -29,6 +29,8 @@ class AndroidCookieJar : MutableCookieJar {
 		for (cookie in cookies) {
 			cookieManager.setCookie(urlString, cookie.toString())
 		}
+		// Flush immediately so cf_clearance and other cookies persist across app restarts
+		cookieManager.flush()
 	}
 
 	override fun removeCookies(url: HttpUrl, predicate: Predicate<Cookie>?) {
