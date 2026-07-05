@@ -57,6 +57,9 @@ class AppShortcutManager @Inject constructor(
 	private var shortcutsUpdateJob: Job? = null
 
 	init {
+		// Dynamic shortcuts (recent manga on long-press) are disabled for privacy.
+		// Only pinned shortcuts (user-added) are supported.
+		clearShortcuts()
 		settings.subscribe(this)
 	}
 

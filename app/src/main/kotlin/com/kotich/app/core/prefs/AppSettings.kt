@@ -290,7 +290,7 @@ class AppSettings @Inject constructor(@ApplicationContext context: Context) {
 		get() = prefs.getBoolean(KEY_EXIT_CONFIRM, false)
 
 	val isDynamicShortcutsEnabled: Boolean
-		get() = prefs.getBoolean(KEY_SHORTCUTS, true)
+		get() = prefs.getBoolean(KEY_SHORTCUTS, false) // disabled by default for privacy
 
 	val isUnstableUpdatesAllowed: Boolean
 		get() = prefs.getBoolean(KEY_UPDATES_UNSTABLE, false)

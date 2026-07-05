@@ -15,10 +15,11 @@ import androidx.biometric.AuthenticationRequest.Biometric
 import androidx.biometric.AuthenticationResult
 import androidx.biometric.AuthenticationResultCallback
 import androidx.biometric.BiometricManager
-import androidx.biometric.BiometricManager.Authenticators.BIOMETRIC_WEAK
+import androidx.biometric.BiometricManager.Authenticators.BIOMETRIC_STRONG
 import androidx.biometric.BiometricManager.BIOMETRIC_SUCCESS
 import androidx.biometric.registerForAuthenticationResult
 import androidx.core.view.WindowInsetsCompat
+import androidx.core.view.isVisible
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.withResumed
 import com.google.android.material.textfield.TextInputLayout
@@ -36,6 +37,11 @@ import com.kotich.app.core.util.ext.systemBarsInsets
 import com.kotich.app.databinding.ActivityProtectBinding
 import com.google.android.material.R as materialR
 
+/**
+ * Strict fingerprint-only lock screen.
+ * Biometric STRONG required (fingerprint, face unlock with hardware backing).
+ * Password field hidden by default — only shown as fallback if biometric fails.
+ */
 @AndroidEntryPoint
 class ProtectActivity :
 	BaseActivity<ActivityProtectBinding>(),
@@ -45,7 +51,7 @@ class ProtectActivity :
 	AuthenticationResultCallback {
 
 	private val viewModel by viewModels<ProtectViewModel>()
-	private var canUseBiometric = false
+	private var biometricAttempted = false
 
 	private val biometricPrompt = registerForAuthenticationResult(resultCallback = this)
 
@@ -53,10 +59,15 @@ class ProtectActivity :
 		super.onCreate(savedInstanceState)
 		window.addFlags(WindowManager.LayoutParams.FLAG_SECURE)
 		setContentView(ActivityProtectBinding.inflate(layoutInflater))
+
 		viewBinding.editPassword.setOnEditorActionListener(this)
 		viewBinding.editPassword.addTextChangedListener(this)
 		viewBinding.buttonNext.setOnClickListener(this)
 		viewBinding.buttonCancel.setOnClickListener(this)
+
+		// Hide password field by default — fingerprint first
+		viewBinding.layoutPassword.isVisible = false
+		viewBinding.buttonNext.isVisible = false
 
 		viewBinding.editPassword.inputType = if (viewModel.isNumericPassword) {
 			EditorInfo.TYPE_CLASS_NUMBER or EditorInfo.TYPE_NUMBER_VARIATION_PASSWORD
@@ -71,13 +82,11 @@ class ProtectActivity :
 			startActivity(intent)
 			finishAfterTransition()
 		}
+
 		lifecycleScope.launch {
 			withResumed {
-				canUseBiometric = useFingerprint()
-				updateEndIcon()
-				if (!canUseBiometric) {
-					viewBinding.editPassword.requestFocus()
-				}
+				// Launch fingerprint immediately
+				launchBiometric()
 			}
 		}
 	}
@@ -98,7 +107,7 @@ class ProtectActivity :
 		when (v.id) {
 			R.id.button_next -> viewModel.tryUnlock(viewBinding.editPassword.text?.toString().orEmpty())
 			R.id.button_cancel -> finish()
-			materialR.id.text_input_end_icon -> useFingerprint()
+			materialR.id.text_input_end_icon -> launchBiometric()
 		}
 	}
 
@@ -120,6 +129,9 @@ class ProtectActivity :
 	override fun onAuthResult(result: AuthenticationResult) {
 		if (result.isSuccess()) {
 			viewModel.unlock()
+		} else {
+			// Biometric failed — show password fallback
+			showPasswordFallback()
 		}
 	}
 
@@ -131,13 +143,20 @@ class ProtectActivity :
 		viewBinding.layoutPassword.isEnabled = !isLoading
 	}
 
-	private fun useFingerprint(): Boolean {
+	/**
+	 * Launch biometric prompt with STRONG requirement (hardware-backed fingerprint/face).
+	 * No PIN/password fallback — only biometric or app password.
+	 */
+	private fun launchBiometric(): Boolean {
 		if (!viewModel.isBiometricEnabled) {
+			showPasswordFallback()
 			return false
 		}
-		if (BiometricManager.from(this).canAuthenticate(BIOMETRIC_WEAK) != BIOMETRIC_SUCCESS) {
+		if (BiometricManager.from(this).canAuthenticate(BIOMETRIC_STRONG) != BIOMETRIC_SUCCESS) {
+			showPasswordFallback()
 			return false
 		}
+		biometricAttempted = true
 		val request = AuthenticationRequest.biometricRequest(
 			title = getString(R.string.app_name),
 			authFallback = Biometric.Fallback.NegativeButton(getString(android.R.string.cancel)),
@@ -150,8 +169,17 @@ class ProtectActivity :
 		return true
 	}
 
+	/**
+	 * Show password field as fallback when biometric is unavailable or fails.
+	 */
+	private fun showPasswordFallback() {
+		viewBinding.layoutPassword.isVisible = true
+		viewBinding.buttonNext.isVisible = true
+		viewBinding.editPassword.requestFocus()
+	}
+
 	private fun updateEndIcon() = with(viewBinding.layoutPassword) {
-		val isFingerprintIcon = canUseBiometric && viewBinding.editPassword.text.isNullOrEmpty()
+		val isFingerprintIcon = viewModel.isBiometricEnabled && viewBinding.editPassword.text.isNullOrEmpty()
 		if (isFingerprintIcon == (endIconMode == TextInputLayout.END_ICON_CUSTOM)) {
 			return@with
 		}

@@ -8,6 +8,10 @@ import com.kotich.app.core.ui.DefaultActivityLifecycleCallbacks
 import javax.inject.Inject
 import javax.inject.Singleton
 
+/**
+ * Strict app lock: re-locks the instant the app goes to background.
+ * Fingerprint-only by default — password field hidden unless biometric fails.
+ */
 @Singleton
 class AppProtectHelper @Inject constructor(private val settings: AppSettings) :
 	DefaultActivityLifecycleCallbacks {
@@ -24,6 +28,18 @@ class AppProtectHelper @Inject constructor(private val settings: AppSettings) :
 			}
 			activity.startActivity(ProtectActivity.newIntent(activity, sourceIntent))
 			activity.finishAfterTransition()
+		}
+	}
+
+	/**
+	 * STRICT: Re-lock the instant any activity stops (app goes to background).
+	 * This means switching apps, pressing home, or any other backgrounding
+	 * will require fingerprint again on return.
+	 */
+	override fun onActivityStopped(activity: Activity) {
+		if (activity !is ProtectActivity) {
+			// Lock immediately when app goes to background
+			restoreLock()
 		}
 	}
 
