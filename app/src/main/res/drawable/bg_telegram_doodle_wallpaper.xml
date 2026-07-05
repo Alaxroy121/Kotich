@@ -1,9 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!--
-  Telegram-style doodle wallpaper pattern.
-  Scattered line-art shapes (stars, moons, planets, hearts) on transparent background.
-  Layer on top of gradient.
--->
 <vector xmlns:android="http://schemas.android.com/apk/res/android"
 	android:width="360dp"
 	android:height="640dp"
@@ -39,11 +34,9 @@
 		android:strokeWidth="0.8"
 		android:fillColor="@android:color/transparent" />
 
-	<!-- Planets with rings -->
-	<circle
-		android:cx="200"
-		android:cy="200"
-		android:r="12"
+	<!-- Planets with rings (circle via path) -->
+	<path
+		android:pathData="M200,188 m-12,0 a12,12 0 1,1 24,0 a12,12 0 1,1 -24,0"
 		android:strokeColor="#1AFFFFFF"
 		android:strokeWidth="0.8"
 		android:fillColor="@android:color/transparent" />
@@ -53,10 +46,8 @@
 		android:strokeWidth="0.6"
 		android:fillColor="@android:color/transparent" />
 
-	<circle
-		android:cx="120"
-		android:cy="520"
-		android:r="10"
+	<path
+		android:pathData="M120,510 m-10,0 a10,10 0 1,1 20,0 a10,10 0 1,1 -20,0"
 		android:strokeColor="#1AFFFFFF"
 		android:strokeWidth="0.8"
 		android:fillColor="@android:color/transparent" />
@@ -80,30 +71,24 @@
 		android:strokeWidth="0.8"
 		android:fillColor="@android:color/transparent" />
 
-	<!-- Small dots/circles -->
-	<circle
-		android:cx="150"
-		android:cy="120"
-		android:r="3"
+	<!-- Small dots (circle via path) -->
+	<path
+		android:pathData="M150,120 m-3,0 a3,3 0 1,1 6,0 a3,3 0 1,1 -6,0"
 		android:strokeColor="#1AFFFFFF"
 		android:strokeWidth="0.6"
 		android:fillColor="@android:color/transparent" />
-	<circle
-		android:cx="250"
-		android:cy="450"
-		android:r="2"
+	<path
+		android:pathData="M250,450 m-2,0 a2,2 0 1,1 4,0 a2,2 0 1,1 -4,0"
 		android:strokeColor="#1AFFFFFF"
 		android:strokeWidth="0.6"
 		android:fillColor="@android:color/transparent" />
-	<circle
-		android:cx="330"
-		android:cy="550"
-		android:r="3"
+	<path
+		android:pathData="M330,550 m-3,0 a3,3 0 1,1 6,0 a3,3 0 1,1 -6,0"
 		android:strokeColor="#1AFFFFFF"
 		android:strokeWidth="0.6"
 		android:fillColor="@android:color/transparent" />
 
-	<!-- More scattered stars -->
+	<!-- More stars -->
 	<path
 		android:pathData="M250,280 L252,286 L258,286 L253,290 L255,296 L250,292 L245,296 L247,290 L242,286 L248,286 Z"
 		android:strokeColor="#1AFFFFFF"
