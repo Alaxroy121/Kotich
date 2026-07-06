@@ -109,25 +109,24 @@ open class RemoteListViewModel @Inject constructor(
 		filterCoordinator.observe()
 			.debounce(FILTER_MIN_INTERVAL)
 			.onEach { filterState ->
-				// Increment loading counter BEFORE cancelling old job to prevent
-				// isLoading from briefly becoming false (which causes blank screen)
-				loadingCounter.increment()
+				// Cancel any existing loading job first
 				if (loadingJob?.isActive == true) {
 					loadingJob?.cancelAndJoin()
-				} else {
-					loadingCounter.decrement()
 				}
 				mangaList.value = null
+				listError.value = null
 				launchLoadingJob(Dispatchers.Default) {
 					try {
-						listError.value = null
 						val list = repository.getList(
 							offset = 0,
 							order = filterState.sortOrder,
 							filter = filterState.listFilter,
 						)
-						mangaList.value = list.distinctById()
-						hasNextPage.value = list.size > mangaList.value.orEmpty().size
+						val distinctList = list.distinctById()
+						mangaList.value = distinctList
+						// Assume more pages if we got a non-empty result
+						// (pagination will stop naturally when next page returns empty)
+						hasNextPage.value = distinctList.isNotEmpty()
 					} catch (e: CancellationException) {
 						throw e
 					} catch (e: Throwable) {
@@ -136,7 +135,6 @@ open class RemoteListViewModel @Inject constructor(
 						hasNextPage.value = false
 					}
 				}.also { loadingJob = it }
-				loadingCounter.decrement()
 			}.catch { error ->
 				listError.value = error
 			}.launchIn(viewModelScope)
@@ -181,9 +179,11 @@ open class RemoteListViewModel @Inject constructor(
 					mangaList.value = (prevList + list).distinctById()
 				}
 				hasNextPage.value = if (append) {
-					prevList != mangaList.value
+					// New items were actually added (list grew after dedup)
+					mangaList.value.orEmpty().size > prevList.size
 				} else {
-					list.size > prevList.size || hasNextPage.value
+					// First load or refresh — assume more pages if we got results
+					list.isNotEmpty()
 				}
 			} catch (e: CancellationException) {
 				throw e
