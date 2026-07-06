@@ -695,6 +695,9 @@ internal abstract class MadaraParser(
 	protected open val postDataReq = "action=manga_get_chapters&manga="
 
 	protected open suspend fun loadChapters(mangaUrl: String, document: Document): List<MangaChapter> {
+		val dateFormat = SimpleDateFormat(datePattern, sourceLocale)
+
+		// Try primary method
 		val doc = if (postReq) {
 			val mangaId = document.select("div#manga-chapters-holder").attr("data-id")
 			val url = "https://$domain/wp-admin/admin-ajax.php"
@@ -704,9 +707,27 @@ internal abstract class MadaraParser(
 			val url = mangaUrl.toAbsoluteUrl(domain).removeSuffix('/') + "/ajax/chapters/"
 			webClient.httpPost(url, emptyMap()).parseHtml()
 		}
-		val dateFormat = SimpleDateFormat(datePattern, sourceLocale)
-		// Try multiple selectors for chapter list items
 		var chapters = doc.select(selectChapter)
+
+		// If primary returned empty, try the other method
+		if (chapters.isEmpty()) {
+			try {
+				val fallbackDoc = if (postReq) {
+					val url = mangaUrl.toAbsoluteUrl(domain).removeSuffix('/') + "/ajax/chapters/"
+					webClient.httpPost(url, emptyMap()).parseHtml()
+				} else {
+					val mangaId = document.select("div#manga-chapters-holder").attr("data-id")
+					if (mangaId.isNotEmpty()) {
+						val url = "https://$domain/wp-admin/admin-ajax.php"
+						val postData = postDataReq + mangaId
+						webClient.httpPost(url, postData).parseHtml()
+					} else {
+						doc
+					}
+				}
+				chapters = fallbackDoc.select(selectChapter)
+			} catch (_: Exception) {}
+		}
 		if (chapters.isEmpty()) {
 			val fallbackSelectors = listOf(
 				"li.wp-manga-chapter",
