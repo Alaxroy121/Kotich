@@ -552,7 +552,7 @@ internal abstract class MadaraParser(
 	protected open val selectDesc =
 		"div.description-summary div.summary__content, div.summary_content div.post-content_item > h5 + div, div.summary_content div.manga-excerpt, div.post-content div.manga-summary, div.post-content div.desc, div.c-page__content div.summary__content"
 	protected open val selectGenre = "div.genres-content a"
-	protected open val selectTestAsync = "div.listing-chapters_wrap, div#chapter-list, div.chapters, ul.main, div.page-chapter, div.chapter-list"
+	protected open val selectTestAsync = "div.listing-chapters_wrap"
 	protected open val selectState =
 		"div.post-content_item:contains(Status), div.post-content_item:contains(Statut), " +
 			"div.post-content_item:contains(État), div.post-content_item:contains(حالة العمل), div.post-content_item:contains(Estado), div.post-content_item:contains(สถานะ)," +
