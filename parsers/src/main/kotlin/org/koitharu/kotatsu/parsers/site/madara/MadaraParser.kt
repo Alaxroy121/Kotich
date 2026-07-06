@@ -545,7 +545,7 @@ internal abstract class MadaraParser(
 	protected open val selectDesc =
 		"div.description-summary div.summary__content, div.summary_content div.post-content_item > h5 + div, div.summary_content div.manga-excerpt, div.post-content div.manga-summary, div.post-content div.desc, div.c-page__content div.summary__content"
 	protected open val selectGenre = "div.genres-content a"
-	protected open val selectTestAsync = "div.listing-chapters_wrap"
+	protected open val selectTestAsync = "div.listing-chapters_wrap, div#chapter-list, div.chapters, ul.main, div.page-chapter, div.chapter-list"
 	protected open val selectState =
 		"div.post-content_item:contains(Status), div.post-content_item:contains(Statut), " +
 			"div.post-content_item:contains(État), div.post-content_item:contains(حالة العمل), div.post-content_item:contains(Estado), div.post-content_item:contains(สถานะ)," +
@@ -568,10 +568,27 @@ internal abstract class MadaraParser(
 
 		val href = doc.selectFirst("head meta[property='og:url']")?.attr("content")?.toRelativeUrl(domain) ?: manga.url
 		val testCheckAsync = doc.select(selectTestAsync)
-		val chaptersDeferred = if (testCheckAsync.isEmpty()) {
-			async { loadChapters(href, doc) }
-		} else {
-			async { getChapters(manga, doc) }
+		val chaptersDeferred = async {
+			// Try primary method based on page structure
+			val chapters = if (testCheckAsync.isEmpty()) {
+				loadChapters(href, doc)
+			} else {
+				getChapters(manga, doc)
+			}
+			// If primary method returned empty, try the other method as fallback
+			if (chapters.isEmpty()) {
+				try {
+					if (testCheckAsync.isEmpty()) {
+						getChapters(manga, doc)
+					} else {
+						loadChapters(href, doc)
+					}
+				} catch (_: Exception) {
+					chapters
+				}
+			} else {
+				chapters
+			}
 		}
 
 		val desc = doc.select(selectDesc).html()
@@ -608,32 +625,64 @@ internal abstract class MadaraParser(
 	}
 
 
-	protected open val selectDate = "span.chapter-release-date i"
-	protected open val selectChapter = "li.wp-manga-chapter"
+	protected open val selectDate = "span.chapter-release-date i, span.chapter-release-date, .chapter-date, .post-on, .published-date"
+	protected open val selectChapter = "li.wp-manga-chapter, .wp-manga-chapter, .chapter-item, .chapter-list-item, .listing-chapters_wrap li"
 
 	protected open suspend fun getChapters(manga: Manga, doc: Document): List<MangaChapter> {
 		val dateFormat = SimpleDateFormat(datePattern, sourceLocale)
-		return doc.body().select(selectChapter).mapChapters(reversed = true) { i, li ->
-			val a = li.selectFirstOrThrow("a")
-			val href = a.attrAsRelativeUrl("href")
-			val link = href + stylePage
-			val dateText = li.selectFirst("a.c-new-tag")?.attr("title") ?: li.selectFirst(selectDate)?.text()
-			val name = a.selectFirst("p")?.text() ?: a.ownText()
-			MangaChapter(
-				id = generateUid(href),
-				title = name,
-				number = i + 1f,
-				volume = 0,
-				url = link,
-				uploadDate = parseChapterDate(
-					dateFormat,
-					dateText,
-				),
-				source = source,
-				scanlator = null,
-				branch = null,
+		// Try multiple selectors for chapter list items
+		val chapterElements = doc.body().select(selectChapter)
+		if (chapterElements.isEmpty()) {
+			// Fallback: try broader selectors
+			val fallbackSelectors = listOf(
+				"li.wp-manga-chapter",
+				".wp-manga-chapter",
+				".chapter-item",
+				".chapter-list-item",
+				".listing-chapters_wrap li",
+				"div#chapter-list li",
+				"div.chapters li",
+				"ul.main li",
+				"div.page-chapter li",
+				"div.chapter-list li",
+				".chapter li",
+				".wp-manga-chapter a",
 			)
+			for (selector in fallbackSelectors) {
+				val fallback = doc.body().select(selector)
+				if (fallback.isNotEmpty()) {
+					return fallback.mapChapters(reversed = true) { i, li ->
+						parseChapterItem(li, i, dateFormat)
+					}
+				}
+			}
 		}
+		return chapterElements.mapChapters(reversed = true) { i, li ->
+			parseChapterItem(li, i, dateFormat)
+		}
+	}
+
+	protected open fun parseChapterItem(li: Element, i: Int, dateFormat: DateFormat): MangaChapter {
+		val a = li.selectFirstOrThrow("a")
+		val href = a.attrAsRelativeUrl("href")
+		val link = href + stylePage
+		val dateText = li.selectFirst("a.c-new-tag")?.attr("title")
+			?: li.selectFirst(selectDate)?.text()
+		val name = a.selectFirst("p")?.text() ?: a.ownText()
+		return MangaChapter(
+			id = generateUid(href),
+			title = name,
+			number = i + 1f,
+			volume = 0,
+			url = link,
+			uploadDate = parseChapterDate(
+				dateFormat,
+				dateText,
+			),
+			source = source,
+			scanlator = null,
+			branch = null,
+		)
 	}
 
 	protected open val postDataReq = "action=manga_get_chapters&manga="
@@ -649,26 +698,30 @@ internal abstract class MadaraParser(
 			webClient.httpPost(url, emptyMap()).parseHtml()
 		}
 		val dateFormat = SimpleDateFormat(datePattern, sourceLocale)
-		return doc.select(selectChapter).mapChapters(reversed = true) { i, li ->
-			val a = li.selectFirstOrThrow("a")
-			val href = a.attrAsRelativeUrl("href")
-			val link = href + stylePage
-			val dateText = li.selectFirst("a.c-new-tag")?.attr("title") ?: li.selectFirst(selectDate)?.text()
-			val name = a.selectFirst("p")?.text() ?: a.ownText()
-			MangaChapter(
-				id = generateUid(href),
-				url = link,
-				title = name,
-				number = i + 1f,
-				volume = 0,
-				branch = null,
-				uploadDate = parseChapterDate(
-					dateFormat,
-					dateText,
-				),
-				scanlator = null,
-				source = source,
+		// Try multiple selectors for chapter list items
+		var chapters = doc.select(selectChapter)
+		if (chapters.isEmpty()) {
+			val fallbackSelectors = listOf(
+				"li.wp-manga-chapter",
+				".wp-manga-chapter",
+				".chapter-item",
+				".chapter-list-item",
+				".listing-chapters_wrap li",
+				"div#chapter-list li",
+				"div.chapters li",
+				"ul.main li",
+				"div.page-chapter li",
+				"div.chapter-list li",
+				".chapter li",
+				".wp-manga-chapter a",
 			)
+			for (selector in fallbackSelectors) {
+				chapters = doc.select(selector)
+				if (chapters.isNotEmpty()) break
+			}
+		}
+		return chapters.mapChapters(reversed = true) { i, li ->
+			parseChapterItem(li, i, dateFormat)
 		}
 	}
 

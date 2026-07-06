@@ -125,7 +125,7 @@ internal abstract class HotComicsParser(
 		}
 	}
 
-	protected open val selectMangaChapters = "#tab-chapter li"
+	protected open val selectMangaChapters = "#tab-chapter li, .chapter-list li, .chapters li, div.list-chapter li, ul.chapter-list li"
 	protected open val datePattern = "MMM dd, yyyy"
 
 	override suspend fun getDetails(manga: Manga): Manga {

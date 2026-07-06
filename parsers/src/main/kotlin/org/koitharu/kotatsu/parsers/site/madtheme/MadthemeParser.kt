@@ -200,21 +200,35 @@ internal abstract class MadthemeParser(
 	}
 
 
-	protected open val selectDate = "div .chapter-update"
-	protected open val selectChapter = "ul#chapter-list li"
+	protected open val selectDate = "div .chapter-update, .chapter-date, .post-on, .published-date"
+	protected open val selectChapter = "ul#chapter-list li, ul.chapter-list li, div.chapter-list li, .chapter-item"
 
 	protected open suspend fun getChapters(doc: Document): List<MangaChapter> {
 		val dateFormat = SimpleDateFormat(datePattern, sourceLocale)
-		val slug = doc.selectFirstOrThrow("script:containsData(bookSlug)").data().substringAfter("bookSlug = \"")
-			.substringBefore("\";")
+		// Try to extract bookSlug from script tags
+		val slug = try {
+			doc.selectFirstOrThrow("script:containsData(bookSlug)").data()
+				.substringAfter("bookSlug = \"")
+				.substringBefore("\";")
+		} catch (e: Exception) {
+			// Fallback: try to find slug in other script patterns
+			doc.select("script").firstNotNullOfOrNull { script ->
+				val html = script.html()
+				Regex("bookSlug\s*=\s*['\"]([^'\"]+)['\"]").find(html)?.groupValues?.getOrNull(1)
+					?: Regex("slug['\"]?\s*[:=]\s*['\"]([^'\"]+)['\"]").find(html)?.groupValues?.getOrNull(1)
+			} ?: ""
+		}
+		if (slug.isEmpty()) {
+			return emptyList()
+		}
 		val docChapter = webClient.httpGet("https://$domain/api/manga/$slug/chapters?source=detail").parseHtml()
 		return docChapter.select(selectChapter).mapChapters(reversed = true) { i, li ->
-			val a = li.selectFirstOrThrow("a")
+			val a = li.selectFirst("a") ?: return@mapChapters null
 			val href = a.attrAsRelativeUrl("href")
 			val dateText = li.selectFirst(selectDate)?.text()
 			MangaChapter(
 				id = generateUid(href),
-				title = li.selectFirst(".chapter-title")?.textOrNull(),
+				title = li.selectFirst(".chapter-title")?.textOrNull() ?: a.text(),
 				number = i + 1f,
 				volume = 0,
 				url = href,

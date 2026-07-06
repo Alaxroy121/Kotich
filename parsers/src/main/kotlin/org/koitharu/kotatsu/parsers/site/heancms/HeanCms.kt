@@ -155,16 +155,27 @@ internal abstract class HeanCms(
 		val dateFormat = SimpleDateFormat(datePattern, Locale.ENGLISH)
 		return manga.copy(
 			chapters = data.mapChapters(reversed = true) { i, it ->
-				val chapterUrl =
-					"/series/${it.getJSONObject("series").getString("series_slug")}/${it.getString("chapter_slug")}"
+				// Handle both old and new API response formats
+				val chapterSlug = it.optString("chapter_slug", "")
+				val seriesSlug = it.optJSONObject("series")?.optString("series_slug", "") ?: ""
+				val chapterUrl = if (chapterSlug.isNotEmpty() && seriesSlug.isNotEmpty()) {
+					"/series/$seriesSlug/$chapterSlug"
+				} else {
+					// Fallback: construct URL from chapter ID
+					"/series/${manga.url}/chapter-${it.optLong("id", 0)}"
+				}
+				val chapterName = it.optString("chapter_name", "")
+					.ifEmpty { it.optString("title", "Chapter ${i + 1}") }
 				MangaChapter(
-					id = generateUid(it.getLong("id")),
-					title = it.getString("chapter_name"),
-					number = i + 1f,
-					volume = 0,
+					id = generateUid(it.optLong("id", 0)),
+					title = chapterName,
+					number = it.optDouble("chapter_number", (i + 1).toDouble()).toFloat(),
+					volume = it.optInt("volume", 0),
 					url = chapterUrl,
 					scanlator = null,
-					uploadDate = dateFormat.parseSafe(it.getString("created_at").substringBefore("T")),
+					uploadDate = dateFormat.parseSafe(
+						it.optString("created_at", "").substringBefore("T")
+					),
 					branch = null,
 					source = source,
 				)

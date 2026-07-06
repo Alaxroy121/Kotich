@@ -135,25 +135,29 @@ internal class MangaGeko(context: MangaLoaderContext) :
 		val urlChapter = mangaUrl + "all-chapters/"
 		val doc = webClient.httpGet(urlChapter.toAbsoluteUrl(domain)).parseHtml()
 		val dateFormat = SimpleDateFormat("MMM dd, yyyy", sourceLocale)
-		return doc.requireElementById("chapters").select("ul.chapter-list li")
-			.mapChapters(reversed = true) { i, li ->
-				val a = li.selectFirstOrThrow("a")
-				val url = a.attrAsRelativeUrl("href")
-				val name = li.selectFirstOrThrow(".chapter-title").text()
-				val dateText = li.select(".chapter-update").attr("datetime").substringBeforeLast(',')
-					.replace(".", "").replace("Sept", "Sep")
-				MangaChapter(
-					id = generateUid(url),
-					title = name,
-					number = i + 1f,
-					volume = 0,
-					url = url,
-					scanlator = null,
-					uploadDate = dateFormat.parseSafe(dateText),
-					branch = null,
-					source = source,
-				)
-			}
+		// Try multiple selectors for chapter list
+		val chapterContainer = doc.getElementById("chapters")
+			?: doc.selectFirst("div.chapters, div.chapter-list, ul.chapter-list")
+		val chapterItems = chapterContainer?.select("ul.chapter-list li, li") ?: emptyList()
+		return chapterItems.mapChapters(reversed = true) { i, li ->
+			val a = li.selectFirst("a") ?: return@mapChapters null
+			val url = a.attrAsRelativeUrl("href")
+			val name = li.selectFirst(".chapter-title, .chapter-name, a")?.text() ?: "Chapter ${i + 1}"
+			val dateText = li.select(".chapter-update, .chapter-date, time").attr("datetime")
+				.substringBeforeLast(',')
+				.replace(".", "").replace("Sept", "Sep")
+			MangaChapter(
+				id = generateUid(url),
+				title = name,
+				number = i + 1f,
+				volume = 0,
+				url = url,
+				scanlator = null,
+				uploadDate = dateFormat.parseSafe(dateText),
+				branch = null,
+				source = source,
+			)
+		}
 	}
 
     override suspend fun getPages(chapter: MangaChapter): List<MangaPage> {

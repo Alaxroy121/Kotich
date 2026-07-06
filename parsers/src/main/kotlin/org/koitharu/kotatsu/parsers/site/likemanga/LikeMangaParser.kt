@@ -217,31 +217,39 @@ internal abstract class LikeMangaParser(
 
 	private val dateFormat = SimpleDateFormat("MMMM d, yyyy", Locale.ENGLISH)
 	private fun parseChapters(root: Element): List<MangaChapter> {
-		return root.select("li.wp-manga-chapter")
+		// Try multiple selectors for chapter list items
+		val chapterElements = root.select("li.wp-manga-chapter")
+		val elements = if (chapterElements.isEmpty()) {
+			root.select(".wp-manga-chapter, .chapter-item, .chapter-list-item, .listing-chapters_wrap li")
+		} else {
+			chapterElements
+		}
+		return elements
 			.map { li ->
-				val url = li.selectFirstOrThrow("a").attrAsRelativeUrl("href")
-				val dateText = if (li.selectFirstOrThrow(".chapter-release-date").text() == "New") {
-					"today"
-				} else {
-					li.selectFirstOrThrow(".chapter-release-date").text()
-				}
-				val chapNum = url.substringAfter("chapter-").substringBefore("-")
+				val a = li.selectFirst("a") ?: return@map null
+				val href = a.attrAsRelativeUrl("href")
+				val dateText = li.selectFirst(".chapter-release-date, .chapter-date, .post-on")?.text()
+					?.takeIf { it.isNotEmpty() } ?: ""
+				val dateParsed = if (dateText == "New") "today" else dateText
+				val chapNum = href.substringAfter("chapter-", "").substringBefore("-").toFloatOrNull()
+					?: (elements.indexOf(li) + 1f)
 
 				MangaChapter(
-					id = generateUid(url),
-					title = li.selectFirstOrThrow("a").text(),
-					number = chapNum.toFloat(),
+					id = generateUid(href),
+					title = a.text(),
+					number = chapNum,
 					volume = 0,
-					url = url,
+					url = href,
 					scanlator = null,
 					uploadDate = parseChapterDate(
 						dateFormat,
-						dateText,
+						dateParsed,
 					),
 					branch = null,
 					source = source,
 				)
 			}
+			.filterNotNull()
 	}
 
 	override suspend fun getPages(chapter: MangaChapter): List<MangaPage> {
