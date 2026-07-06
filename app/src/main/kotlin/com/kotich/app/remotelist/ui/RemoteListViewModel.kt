@@ -109,32 +109,9 @@ open class RemoteListViewModel @Inject constructor(
 		filterCoordinator.observe()
 			.debounce(FILTER_MIN_INTERVAL)
 			.onEach { filterState ->
-				// Cancel any existing loading job first
-				if (loadingJob?.isActive == true) {
-					loadingJob?.cancelAndJoin()
-				}
+				loadingJob?.cancelAndJoin()
 				mangaList.value = null
-				listError.value = null
-				launchLoadingJob(Dispatchers.Default) {
-					try {
-						val list = repository.getList(
-							offset = 0,
-							order = filterState.sortOrder,
-							filter = filterState.listFilter,
-						)
-						val distinctList = list.distinctById()
-						mangaList.value = distinctList
-						// Assume more pages if we got a non-empty result
-						// (pagination will stop naturally when next page returns empty)
-						hasNextPage.value = distinctList.isNotEmpty()
-					} catch (e: CancellationException) {
-						throw e
-					} catch (e: Throwable) {
-						e.printStackTraceDebug()
-						listError.value = e
-						hasNextPage.value = false
-					}
-				}.also { loadingJob = it }
+				loadList(filterState, false)
 			}.catch { error ->
 				listError.value = error
 			}.launchIn(viewModelScope)
@@ -164,6 +141,9 @@ open class RemoteListViewModel @Inject constructor(
 	}
 
 	protected fun loadList(filterState: FilterCoordinator.Snapshot, append: Boolean): Job {
+		loadingJob?.let {
+			if (it.isActive) return it
+		}
 		return launchLoadingJob(Dispatchers.Default) {
 			try {
 				listError.value = null
@@ -179,11 +159,9 @@ open class RemoteListViewModel @Inject constructor(
 					mangaList.value = (prevList + list).distinctById()
 				}
 				hasNextPage.value = if (append) {
-					// New items were actually added (list grew after dedup)
-					mangaList.value.orEmpty().size > prevList.size
+					prevList != mangaList.value
 				} else {
-					// First load or refresh — assume more pages if we got results
-					list.isNotEmpty()
+					list.size > prevList.size || hasNextPage.value
 				}
 			} catch (e: CancellationException) {
 				throw e
