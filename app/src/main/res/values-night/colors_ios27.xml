@@ -7,4 +7,51 @@
 	<color name="ios27_glass_border">#33FFFFFF</color>
 	<color name="ios27_glass_fill_secondary">#663A3A3C</color>
 	<color name="ios27_glass_tint_blue">#1A0A84FF</color>
+
+	<!-- ==================== Material 3 Mapping — Dark Mode ==================== -->
+	<!-- Primary -->
+	<color name="ios27_primary">#0A84FF</color>
+	<color name="ios27_onPrimary">#003060</color>
+	<color name="ios27_primaryContainer">#004A8F</color>
+	<color name="ios27_onPrimaryContainer">#D0E8FF</color>
+	<color name="ios27_inversePrimary">#005EB4</color>
+
+	<!-- Secondary -->
+	<color name="ios27_secondary">#5E5CE6</color>
+	<color name="ios27_onSecondary">#1D1A4A</color>
+	<color name="ios27_secondaryContainer">#363370</color>
+	<color name="ios27_onSecondaryContainer">#E8E0FF</color>
+
+	<!-- Tertiary -->
+	<color name="ios27_tertiary">#BF5AF2</color>
+	<color name="ios27_onTertiary">#380058</color>
+	<color name="ios27_tertiaryContainer">#5C007F</color>
+	<color name="ios27_onTertiaryContainer">#F5DEFF</color>
+
+	<!-- Surfaces — dark iOS style -->
+	<color name="ios27_background">#000000</color>
+	<color name="ios27_on_background">#F2F2F7</color>
+	<color name="ios27_surface">#1C1C1E</color>
+	<color name="ios27_on_surface">#F2F2F7</color>
+	<color name="ios27_on_surface_variant">#EBEBF5</color>
+	<color name="ios27_surface_variant">#3A3A3C</color>
+	<color name="ios27_surface_dim">#1C1C1E</color>
+	<color name="ios27_surface_bright">#3A3A3C</color>
+	<color name="ios27_surface_container_lowest">#000000</color>
+	<color name="ios27_surface_container_low">#1C1C1E</color>
+	<color name="ios27_surface_container">#2C2C2E</color>
+	<color name="ios27_surface_container_high">#3A3A3C</color>
+	<color name="ios27_surface_container_highest">#48484A</color>
+	<color name="ios27_inverse_surface">#F2F2F7</color>
+	<color name="ios27_inverse_on_surface">#1C1C1E</color>
+
+	<!-- Error -->
+	<color name="ios27_error">#FF453A</color>
+	<color name="ios27_on_error">#FFFFFF</color>
+	<color name="ios27_error_container">#930006</color>
+	<color name="ios27_on_error_container">#FFDAD4</color>
+
+	<!-- Outline -->
+	<color name="ios27_outline">#8E8E93</color>
+	<color name="ios27_outline_variant">#48484A</color>
 </resources>
