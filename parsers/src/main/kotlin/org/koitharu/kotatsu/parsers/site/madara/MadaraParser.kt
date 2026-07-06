@@ -482,8 +482,8 @@ internal abstract class MadaraParser(
 			return emptyList()
 		}
 
-		return elements.map { div ->
-			val a = div.selectFirst("a") ?: return@map null
+		return elements.mapNotNull { div ->
+			val a = div.selectFirst("a") ?: return@mapNotNull null
 			val href = a.attrAsRelativeUrl("href")
 			val summary = div.selectFirst(".tab-summary") ?: div.selectFirst(".item-summary") ?: div
 			val author = summary.selectFirst(".mg_author, .mg_artists, .author, .artist")?.selectFirst("a")?.ownText()
