@@ -214,8 +214,8 @@ internal abstract class MadthemeParser(
 			// Fallback: try to find slug in other script patterns
 			doc.select("script").firstNotNullOfOrNull { script ->
 				val html = script.html()
-				Regex("bookSlug\s*=\s*['\"]([^'\"]+)['\"]").find(html)?.groupValues?.getOrNull(1)
-					?: Regex("slug['\"]?\s*[:=]\s*['\"]([^'\"]+)['\"]").find(html)?.groupValues?.getOrNull(1)
+				Regex("""bookSlug\s*=\s*['"]([^'"]+)['"]""").find(html)?.groupValues?.getOrNull(1)
+					?: Regex("""slug['"]?\s*[:=]\s*['"]([^'"]+)['"]""").find(html)?.groupValues?.getOrNull(1)
 			} ?: ""
 		}
 		if (slug.isEmpty()) {
