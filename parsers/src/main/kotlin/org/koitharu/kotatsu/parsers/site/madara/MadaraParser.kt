@@ -496,16 +496,16 @@ internal abstract class MadaraParser(
 					.orEmpty(),
 				altTitles = emptySet(),
 				rating = div.selectFirst("span.total_votes, .rating, .score")?.ownText()?.toFloatOrNull()?.div(5f) ?: RATING_UNKNOWN,
-				tags = summary.selectFirst(".mg_genres, .genres, .tags")?.select("a")?.mapNotNullToSet { a ->
+				tags = summary.selectFirst(".mg_genres, .genres, .tags")?.select("a")?.mapNotNullToSet { tag ->
 					MangaTag(
-						key = a.attr("href").removeSuffix('/').substringAfterLast('/'),
-						title = a.text().ifEmpty { return@mapNotNullToSet null }.toTitleCase(),
+						key = tag.attr("href").removeSuffix('/').substringAfterLast('/'),
+						title = tag.text().ifEmpty { return@mapNotNullToSet null }.toTitleCase(),
 						source = source,
 					)
 				}.orEmpty(),
 				authors = setOfNotNull(author),
 				state = when (
-					summary?.selectFirst(".mg_status")
+					summary.selectFirst(".mg_status, .status")
 						?.selectFirst(".summary-content")
 						?.ownText()?.lowercase()
 						.orEmpty()
