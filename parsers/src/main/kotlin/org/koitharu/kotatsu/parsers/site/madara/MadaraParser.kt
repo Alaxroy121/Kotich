@@ -469,6 +469,12 @@ internal abstract class MadaraParser(
 	protected open fun parseMangaList(doc: Document): List<Manga> {
 		val elements = doc.select("div.row.c-tabs-item__content").ifEmpty {
 			doc.select("div.page-item-detail")
+		}.ifEmpty {
+			// Modern Madara themes use different class names
+			doc.select("div.manga-item, div.manga-listing, div.manga-card, div.manga-post, div.manga-entry, div.post-item, div.series-item, div.manga-item-wrap, div.c-tabs-item__content")
+		}.ifEmpty {
+			// Broader fallback for any manga-like items
+			doc.select("div[class*=manga] a[href*=manga], div[class*=comic] a[href*=comic], article.manga, div.bs-item, div.manga__item")
 		}
 
 		// Avoid "Content not found or removed" errors
@@ -477,19 +483,20 @@ internal abstract class MadaraParser(
 		}
 
 		return elements.map { div ->
-			val href = div.selectFirstOrThrow("a").attrAsRelativeUrl("href")
-			val summary = div.selectFirst(".tab-summary") ?: div.selectFirst(".item-summary")
-			val author = summary?.selectFirst(".mg_author, .mg_artists")?.selectFirst("a")?.ownText()
+			val a = div.selectFirst("a") ?: return@map null
+			val href = a.attrAsRelativeUrl("href")
+			val summary = div.selectFirst(".tab-summary") ?: div.selectFirst(".item-summary") ?: div
+			val author = summary.selectFirst(".mg_author, .mg_artists, .author, .artist")?.selectFirst("a")?.ownText()
 			Manga(
 				id = generateUid(href),
 				url = href,
 				publicUrl = href.toAbsoluteUrl(div.host ?: domain),
 				coverUrl = div.selectFirst("img")?.src(),
-				title = (summary?.selectFirst("h3, h4") ?: div.selectFirst(".manga-name, .post-title"))?.text()
+				title = (summary.selectFirst("h3, h4, .manga-name, .post-title, .series-name, .title") ?: div.selectFirst(".manga-name, .post-title, .title"))?.text()
 					.orEmpty(),
 				altTitles = emptySet(),
-				rating = div.selectFirst("span.total_votes")?.ownText()?.toFloatOrNull()?.div(5f) ?: RATING_UNKNOWN,
-				tags = summary?.selectFirst(".mg_genres")?.select("a")?.mapNotNullToSet { a ->
+				rating = div.selectFirst("span.total_votes, .rating, .score")?.ownText()?.toFloatOrNull()?.div(5f) ?: RATING_UNKNOWN,
+				tags = summary.selectFirst(".mg_genres, .genres, .tags")?.select("a")?.mapNotNullToSet { a ->
 					MangaTag(
 						key = a.attr("href").removeSuffix('/').substringAfterLast('/'),
 						title = a.text().ifEmpty { return@mapNotNullToSet null }.toTitleCase(),
